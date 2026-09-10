@@ -149,6 +149,12 @@
 ---
 
 ## Deployment History & Known Issues
+### Root Cause
+The `<style>` tag was never closed (`</style>` was missing). The browser treated all HTML content as CSS text, resulting in a blank page on ALL deployment platforms (Vercel and GitHub Pages alike). This was present since early in development.
+
+### Fix
+Added `</style>` before `</head>`. Restored hero animations, scroll reveal, and decorative pseudo-elements.
+
 ### Vercel (abandoned)
 - Project renamed from `portfolio` to `ebad-portfolio`
 - Deployed via `vercel --yes --prod` from CLI
