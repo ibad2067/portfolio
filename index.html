@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ebad-ur-Rehman Rajput — Infrastructure & Network Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+/* ── TOKENS – professional dark palette ── */
+:root {
+  --bg:       #0f1419;
+  --surface:  #1a2030;
+  --surface2: #1e2738;
+  --panel:    #252f3f;
+  --accent:   #60a5fa;
+  --accent2:  #818cf8;
+  --accent3:  #34d399;
+  --green:    #34d399;
+  --text:     #e2e8f0;
+  --muted:    #8892a4;
+  --faint:    rgba(96,165,250,0.08);
+  --border:   rgba(96,165,250,0.15);
+  --glow:     rgba(96,165,250,0.2);
+  --radius:   4px;
+  --nav-h:    64px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── subtle natural texture ── */
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  height:var(--nav-h);
+  padding:0 clamp(20px, 5vw, 60px);
+  display:flex; align-items:center; justify-content:space-between;
+  backdrop-filter:blur(24px);
+  background:rgba(15,20,25,0.88);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-logo {
+  font-family:'Space Mono', monospace;
+  font-weight:700; font-size:1rem;
+  color:var(--accent); letter-spacing:0.06em;
+}
+
+/* hamburger – hidden on desktop */
+.nav-toggle {
+  display:none;
+  background:none; border:none; cursor:pointer;
+  flex-direction:column; gap:5px; padding:6px;
+}
+.nav-toggle span {
+  display:block; width:22px; height:2px;
+  background:var(--accent); border-radius:2px;
+  transition:transform 0.3s, opacity 0.3s;
+}
+.nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity:0; }
+.nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+.nav-links { display:flex; gap:32px; }
+.nav-links a {
+  color:var(--muted); text-decoration:none;
+  font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase;
+  transition:color 0.25s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-4px; left:0;
+  width:0; height:1px; background:var(--accent); transition:width 0.3s;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--accent); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+
+/* mobile nav drawer */
+@media(max-width:768px) {
+  .nav-toggle { display:flex; }
+  .nav-links {
+    display:none; flex-direction:column; gap:0;
+    position:fixed; top:var(--nav-h); left:0; right:0;
+    background:rgba(15,20,25,0.98);
+    border-bottom:1px solid var(--border);
+    padding:12px 0;
+  }
+  .nav-links.open { display:flex; }
+  .nav-links a {
+    padding:14px clamp(20px,5vw,60px);
+    font-size:0.78rem;
+  }
+  .nav-links a::after { display:none; }
+}
+
+/* ── HERO ── */
+#hero {
+  min-height:100vh;
+  display:flex; align-items:center;
+  padding: calc(var(--nav-h) + 60px) clamp(20px,5vw,60px) 80px;
+  position:relative; overflow:hidden;
+}
+
+/* diagonal stripe accent */
+.hero-stripe {
+  position:absolute; right:0; top:0; bottom:0;
+  width:clamp(260px, 42vw, 540px);
+  background:repeating-linear-gradient(
+    -55deg,
+    transparent, transparent 18px,
+    rgba(96,165,250,0.05) 18px, rgba(96,165,250,0.05) 19px
+  );
+  pointer-events:none; z-index:0;
+}
+.hero-stripe::before {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, var(--bg) 0%, transparent 30%);
+}
+
+.hero-glow {
+  position:absolute; right:10vw; top:30%;
+  width:380px; height:380px;
+  background:radial-gradient(circle, rgba(96,165,250,0.1) 0%, transparent 70%);
+  border-radius:50%; pointer-events:none; z-index:0;
+  animation:breathe 6s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+
+.hero-content { position:relative; z-index:2; max-width:680px; }
+
+.hero-status {
+  display:inline-flex; align-items:center; gap:9px;
+  font-family:'Space Mono', monospace;
+  font-size:0.66rem; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--accent); border:1px solid var(--border);
+  padding:6px 16px; border-radius:var(--radius);
+  margin-bottom:36px;
+}
+.status-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--green); animation:pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+.hero-name {
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  font-size:clamp(2.4rem, 7.5vw, 5.8rem);
+  line-height:1.0; letter-spacing:-0.03em;
+  margin-bottom:18px;
+}
+.hero-name .accent { color:var(--accent); }
+
+.hero-title {
+  font-family:'Space Mono', monospace;
+  font-size:clamp(0.75rem, 1.6vw, 1.05rem);
+  color:var(--muted); letter-spacing:0.08em;
+  margin-bottom:28px;
+}
+.hero-title span { color:var(--accent2); }
+
+.hero-desc {
+  font-size:clamp(0.8rem, 1.4vw, 0.9rem);
+  line-height:1.85;
+  color:var(--muted);
+  max-width:520px; margin-bottom:44px;
+}
+
+.hero-cta {
+  display:flex; gap:14px; flex-wrap:wrap;
+}
+
+.btn-primary {
+  padding:13px 30px;
+  background:var(--accent); color:var(--bg);
+  font-family:'Space Mono', monospace;
+  font-size:0.7rem; font-weight:700;
+  letter-spacing:0.14em; text-transform:uppercase;
+  text-decoration:none; border:none; cursor:pointer;
+  border-radius:var(--radius);
+  transition:transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 0 28px var(--glow); background:var(--accent2); }
+
+.btn-ghost {
+  padding:13px 30px;
+  background:transparent; color:var(--accent);
+  border:1px solid var(--border);
+  font-family:'Space Mono', monospace;
+  font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
+  text-decoration:none; border-radius:var(--radius);
+  transition:background 0.25s, border-color 0.25s, transform 0.2s;
+}
+.btn-ghost:hover { background:var(--faint); border-color:var(--accent); transform:translateY(-2px); }
+
+/* stats – tablet+ only */
+.hero-stats {
+  position:absolute; right:clamp(40px, 6vw, 80px); top:50%;
+  transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:28px;
+  animation:fadeLeft 0.7s 1s both;
+}
+.stat-item { text-align:right; }
+.stat-num {
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700; font-size:2.6rem;
+  color:var(--accent); line-height:1;
+}
+.stat-label {
+  font-family:'Space Mono', monospace;
+  font-size:0.58rem; color:var(--muted);
+  letter-spacing:0.18em; text-transform:uppercase; margin-top:4px;
+}
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeLeft { from{opacity:0;transform:translate(24px,-50%)} to{opacity:1;transform:translate(0,-50%)} }
+
+@media(max-width:1024px) {
+  .hero-stats { display:none; }
+}
+@media(max-width:768px) {
+  .hero-content { max-width:100%; }
+  .hero-desc { max-width:100%; }
+  .hero-stripe { width:40vw; }
+}
+@media(max-width:520px) {
+  .hero-stripe { display:none; }
+  .hero-glow { display:none; }
+  #hero { padding-bottom:60px; min-height:auto; }
+}
+
+/* ── SECTIONS ── */
+section {
+  padding:clamp(56px, 10vw, 110px) clamp(20px, 5vw, 60px);
+  position:relative; z-index:2;
+}
+
+.section-header { margin-bottom:clamp(32px, 5vw, 56px); }
+
+.section-num {
+  font-family:'Space Mono', monospace;
+  font-size:0.62rem; letter-spacing:0.3em;
+  color:var(--accent); text-transform:uppercase; margin-bottom:12px;
+}
+
+.section-title {
+  font-weight:700; font-size:clamp(1.5rem, 4vw, 2.8rem); line-height:1.1;
+}
+
+.section-line {
+  width:52px; height:2px;
+  background:linear-gradient(90deg, var(--accent), transparent);
+  margin-top:18px;
+}
+
+/* ── ABOUT ── */
+#about {
+  background:var(--surface);
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+
+.about-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(32px, 6vw, 80px);
+  align-items:start;
+}
+
+.about-text p {
+  font-size:0.875rem; line-height:1.9;
+  color:var(--text); opacity:0.78; margin-bottom:18px;
+}
+
+.about-info {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:12px; margin-top:28px;
+}
+
+.info-item {
+  padding:14px 16px;
+  border:1px solid var(--border);
+  background:var(--surface2); border-radius:var(--radius);
+}
+.info-label {
+  font-family:'Space Mono', monospace;
+  font-size:0.58rem; color:var(--muted);
+  letter-spacing:0.2em; text-transform:uppercase; margin-bottom:5px;
+}
+.info-value { font-size:0.78rem; color:var(--text); word-break:break-word; }
+
+/* circuit visual */
+.circuit-visual {
+  display:flex; align-items:center; justify-content:center;
+  min-height:260px;
+}
+.circuit-svg { width:100%; max-width:320px; }
+.circuit-svg .track { stroke:var(--accent); stroke-width:1; fill:none; opacity:0.35; }
+.circuit-svg .node { fill:var(--accent); }
+.circuit-svg .node-glow { fill:var(--accent); opacity:0.12; }
+
+@media(max-width:800px) {
+  .about-grid { grid-template-columns:1fr; }
+  .circuit-visual { display:none; }
+}
+@media(max-width:480px) {
+  .about-info { grid-template-columns:1fr; }
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap:14px;
+}
+
+.skill-card {
+  padding:24px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  border-radius:var(--radius);
+  transition:transform 0.35s cubic-bezier(.23,1,.32,1), box-shadow 0.35s, border-color 0.35s;
+  cursor:default;
+}
+.skill-card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 12px 36px rgba(96,165,250,0.1);
+  border-color:var(--accent);
+}
+
+.skill-icon { font-size:1.5rem; margin-bottom:14px; }
+.skill-name {
+  font-weight:700; font-size:0.95rem; margin-bottom:12px; color:var(--text);
+}
+.skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.skill-tag {
+  font-family:'Space Mono', monospace;
+  font-size:0.6rem; padding:3px 9px;
+  background:var(--panel); color:var(--muted);
+  border:1px solid var(--border); border-radius:2px;
+  letter-spacing:0.06em;
+  transition:color 0.25s, border-color 0.25s;
+}
+.skill-card:hover .skill-tag { color:var(--accent); border-color:rgba(96,165,250,0.3); }
+
+/* ── EXPERIENCE ── */
+#experience {
+  background:var(--surface);
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+
+.timeline { position:relative; padding-left:clamp(28px, 5vw, 44px); }
+.timeline::before {
+  content:''; position:absolute; left:0; top:0; bottom:0;
+  width:1px; background:linear-gradient(180deg, var(--accent), transparent);
+}
+.timeline-item { position:relative; margin-bottom:52px; }
+.timeline-item::before {
+  content:''; position:absolute;
+  left:clamp(-32px, -4.5vw, -48px); top:7px;
+  width:8px; height:8px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 12px var(--accent);
+}
+
+.timeline-date {
+  font-family:'Space Mono', monospace;
+  font-size:0.62rem; color:var(--accent);
+  letter-spacing:0.2em; text-transform:uppercase; margin-bottom:6px;
+}
+.timeline-role {
+  font-weight:700; font-size:1.2rem; margin-bottom:3px;
+}
+.timeline-company {
+  font-size:0.78rem; color:var(--muted); margin-bottom:18px;
+}
+.timeline-list { list-style:none; }
+.timeline-list li {
+  font-size:0.82rem; line-height:1.8;
+  color:var(--text); opacity:0.72;
+  padding-left:18px; margin-bottom:8px; position:relative;
+}
+.timeline-list li::before { content:'›'; position:absolute; left:0; color:var(--accent); }
+
+@media(max-width:520px) {
+  .timeline-item { margin-bottom:36px; }
+  .timeline-list li { font-size:0.78rem; }
+}
+
+/* ── PROJECTS ── */
+.project-card {
+  border:1px solid var(--border);
+  background:var(--surface);
+  padding:clamp(24px, 4vw, 48px);
+  border-radius:var(--radius);
+  position:relative; overflow:hidden;
+  transition:border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.project-card:hover {
+  border-color:var(--accent);
+  transform:translateY(-3px);
+  box-shadow:0 0 48px rgba(96,165,250,0.08);
+}
+.project-card::before {
+  content:''; position:absolute; left:0; top:0; bottom:0;
+  width:3px; background:linear-gradient(180deg, var(--accent), var(--accent2));
+  transform:scaleY(0); transition:transform 0.35s; transform-origin:top;
+}
+.project-card:hover::before { transform:scaleY(1); }
+
+.project-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:'Space Mono', monospace;
+  font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--green); border:1px solid rgba(52,211,153,0.3);
+  padding:4px 12px; border-radius:2px; margin-bottom:20px;
+}
+.project-title {
+  font-weight:700; font-size:clamp(1.3rem, 3vw, 2rem); margin-bottom:14px;
+  letter-spacing:-0.01em;
+}
+.project-desc {
+  font-size:0.84rem; line-height:1.8;
+  color:var(--text); opacity:0.78; margin-bottom:22px;
+}
+.project-points { list-style:none; }
+.project-points li {
+  font-size:0.8rem; line-height:1.8;
+  color:var(--text); opacity:0.7;
+  padding-left:22px; position:relative; margin-bottom:8px;
+}
+.project-points li::before {
+  content:'//'; position:absolute; left:0;
+  color:var(--accent2); font-family:'Space Mono', monospace;
+  font-size:0.6rem; top:4px;
+}
+
+/* ── ACHIEVEMENTS ── */
+#achievements {
+  background:var(--surface);
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+
+.achievements-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(min(260px,100%), 1fr));
+  gap:14px;
+}
+
+.achievement-card {
+  padding:28px; border:1px solid var(--border);
+  background:var(--bg); border-radius:var(--radius);
+  transition:transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.achievement-card:hover {
+  transform:translateY(-4px);
+  border-color:var(--accent3);
+  box-shadow:0 0 36px rgba(96,165,250,0.08);
+}
+
+.achievement-num {
+  font-family:'Space Grotesk', sans-serif;
+  font-size:2.8rem; font-weight:700;
+  color:rgba(96,165,250,0.15); line-height:1; margin-bottom:12px;
+  transition:color 0.3s;
+}
+.achievement-card:hover .achievement-num { color:var(--accent); }
+.achievement-title { font-weight:700; font-size:0.92rem; margin-bottom:8px; }
+.achievement-desc { font-size:0.76rem; color:var(--muted); line-height:1.7; }
+
+/* ── EDUCATION ── */
+.edu-card {
+  padding:clamp(22px, 3vw, 36px);
+  border:1px solid var(--border);
+  background:var(--surface); margin-bottom:16px;
+  border-radius:var(--radius); position:relative; overflow:hidden;
+  transition:border-color 0.35s, transform 0.35s;
+}
+.edu-card:hover { border-color:var(--accent); transform:translateX(5px); }
+.edu-card::before {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg, var(--accent), var(--accent2));
+  transform:scaleY(0); transition:transform 0.35s; transform-origin:top;
+}
+.edu-card:hover::before { transform:scaleY(1); }
+
+.edu-period {
+  font-family:'Space Mono', monospace;
+  font-size:0.62rem; letter-spacing:0.2em; color:var(--accent);
+  text-transform:uppercase; margin-bottom:7px;
+}
+.edu-degree { font-weight:700; font-size:1.15rem; margin-bottom:3px; }
+.edu-school { font-size:0.78rem; color:var(--muted); margin-bottom:10px; }
+.edu-detail { font-size:0.76rem; color:var(--text); opacity:0.6; line-height:1.7; }
+.edu-grade {
+  display:inline-block; margin-top:12px;
+  padding:4px 14px; border:1px solid rgba(52,211,153,0.35);
+  color:var(--green);
+  font-family:'Space Mono', monospace;
+  font-size:0.64rem; letter-spacing:0.2em; border-radius:2px;
+}
+
+/* ── CONTACT ── */
+#contact { text-align:center; }
+.contact-wrapper { max-width:560px; margin:0 auto; }
+.contact-desc {
+  font-size:0.85rem; color:var(--muted); line-height:1.8; margin-top:22px;
+}
+.contact-links {
+  display:flex; justify-content:center; gap:14px;
+  flex-wrap:wrap; margin-top:38px;
+}
+.contact-link {
+  display:flex; align-items:center; gap:10px;
+  padding:13px 22px; border:1px solid var(--border);
+  color:var(--muted); text-decoration:none;
+  font-family:'Space Mono', monospace;
+  font-size:0.68rem; letter-spacing:0.08em;
+  border-radius:var(--radius);
+  transition:color 0.25s, border-color 0.25s, transform 0.2s, background 0.25s;
+}
+.contact-link:hover {
+  color:var(--accent); border-color:var(--accent);
+  transform:translateY(-2px); background:var(--faint);
+}
+.contact-icon { font-size:0.95rem; }
+
+@media(max-width:480px) {
+  .contact-links { flex-direction:column; align-items:center; }
+  .contact-link { width:100%; max-width:320px; justify-content:center; }
+}
+
+/* ── FOOTER ── */
+footer {
+  padding:28px clamp(20px,5vw,60px);
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:10px;
+  position:relative; z-index:2;
+}
+.footer-left, .footer-right {
+  font-family:'Space Mono', monospace;
+  font-size:0.66rem; color:var(--muted);
+}
+
+@media(max-width:480px) {
+  footer { flex-direction:column; text-align:center; gap:6px; }
+}
+
+/* ── REVEAL ── */
+.reveal {
+  transition:opacity 0.65s cubic-bezier(.23,1,.32,1), transform 0.65s cubic-bezier(.23,1,.32,1);
+}
+.reveal.visible { opacity:1; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--accent2); border-radius:4px; }
+
+/* ── FOCUS ── */
+a:focus-visible, button:focus-visible {
+  outline:2px solid var(--accent); outline-offset:3px;
+}
+
+/* animation overrides removed */
+
+/* ── Company logos ── */
+.timeline-company { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.company-logo { height:22px; width:auto; border-radius:3px; filter:brightness(0.9); }
+
+/* ── Project thumbnails ── */
+.project-thumb { width:100%; max-height:280px; object-fit:cover; border-radius:var(--radius); margin-bottom:20px; border:1px solid var(--border); }
+
+/* ── Live demo button ── */
+.project-card .btn-ghost { margin-top:16px; display:inline-block; }
+
+/* ── responsive helpers ── */
+@media(max-width:520px) {
+  section { padding:clamp(40px, 8vw, 56px) clamp(16px, 4vw, 60px); }
+  .section-header { margin-bottom:28px; }
+  .hero-name { font-size:clamp(2rem, 10vw, 2.4rem); }
+  .btn-primary, .btn-ghost { width:100%; text-align:center; }
+  .hero-cta { flex-direction:column; }
+}
+
+/* ── Add Project Button ── */
+.add-project-btn {
+  font-family:'Space Mono', monospace;
+  font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--accent); background:transparent;
+  border:1px solid var(--border); border-radius:var(--radius);
+  padding:6px 16px; cursor:pointer;
+  transition:background 0.25s, border-color 0.25s, transform 0.2s;
+}
+.add-project-btn:hover {
+  background:var(--faint); border-color:var(--accent); transform:translateY(-1px);
+}
+
+/* ── Section header flex ── */
+.section-header { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.section-header .section-line { margin-top:18px; }
+
+/* ── Modal Overlay ── */
+.modal-overlay {
+  position:fixed; inset:0; z-index:2000;
+  background:rgba(0,0,0,0.7); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.3s;
+}
+.modal-overlay.active { opacity:1; pointer-events:auto; }
+
+/* ── Modal ── */
+.modal {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:32px;
+  width:90%; max-width:520px;
+  transform:translateY(20px); transition:transform 0.3s;
+  max-height:90vh; overflow-y:auto;
+}
+.modal-overlay.active .modal { transform:translateY(0); }
+.modal h3 {
+  font-weight:700; font-size:1.1rem; margin-bottom:24px; color:var(--text);
+}
+.modal label {
+  display:block; font-family:'Space Mono', monospace;
+  font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:6px; margin-top:16px;
+}
+.modal input, .modal textarea {
+  width:100%; padding:10px 12px;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:var(--radius); color:var(--text);
+  font-family:'Space Grotesk', sans-serif; font-size:0.82rem;
+  outline:none; transition:border-color 0.25s;
+}
+.modal input:focus, .modal textarea:focus { border-color:var(--accent); }
+.modal textarea { resize:vertical; min-height:80px; }
+.modal-actions {
+  display:flex; gap:12px; margin-top:28px; justify-content:flex-end;
+}
+.modal-actions .btn-primary { padding:10px 24px; }
+.modal-actions .btn-ghost { padding:10px 24px; }
+
+/* ── Delete Button on Dynamic Cards ── */
+.project-card { position:relative; }
+.project-card .delete-btn {
+  position:absolute; top:12px; right:12px;
+  width:24px; height:24px; border-radius:50%;
+  background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3);
+  color:#ef4444; font-size:0.75rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.2s, transform 0.2s; z-index:10;
+}
+.project-card .delete-btn:hover {
+  background:rgba(239,68,68,0.3); transform:scale(1.1);
+}
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ER<span style="color:var(--text);font-weight:400">.</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#achievements">Awards</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-status">
+      <span class="status-dot"></span>
+      Open to Opportunities
+    </div>
+    <h1 class="hero-name">Ebad-ur-<br><span class="accent">Rehman</span><br>Rajput</h1>
+    <p class="hero-title">Infrastructure &amp; <span>Network Engineer</span></p>
+    <p class="hero-desc">Computer Science graduate with expertise in network configuration, system administration, and cybersecurity. Building secure, resilient infrastructure — one packet at a time.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">3rd</div>
+      <div class="stat-label">Ignite AI 2026<br>Sindh Region</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">96%</div>
+      <div class="stat-label">HSSC Score<br>A1 Grade</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4+</div>
+      <div class="stat-label">Years of<br>Study</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <div class="section-num">01 — About</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a Computer Science graduate from QUEST, Nawabshah, specializing in network engineering and infrastructure. My work spans from configuring enterprise routers to building AI-powered cybersecurity frameworks.</p>
+      <p>My thesis, ZEROSHIELD, is an AI framework that detects zero-day attacks through behavioral pattern analysis — a project that merges my passion for network security with machine learning.</p>
+      <div class="about-info">
+        <div class="info-item">
+          <div class="info-label">Location</div>
+          <div class="info-value">Nawabshah, Sindh, PK</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value">ebadurrehman881@gmail.com</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Phone</div>
+          <div class="info-value">(+92) 332 204 6126</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Graduated</div>
+          <div class="info-value">August 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual circuit-visual reveal">
+      <!-- Circuit board aesthetic – inline SVG, amber nodes & traces -->
+      <svg class="circuit-svg" viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- horizontal tracks -->
+        <line class="track" x1="20" y1="50" x2="300" y2="50"/>
+        <line class="track" x1="20" y1="130" x2="300" y2="130"/>
+        <line class="track" x1="20" y1="210" x2="300" y2="210"/>
+        <!-- vertical connectors -->
+        <line class="track" x1="80" y1="50" x2="80" y2="130"/>
+        <line class="track" x1="160" y1="50" x2="160" y2="210"/>
+        <line class="track" x1="240" y1="130" x2="240" y2="210"/>
+        <line class="track" x1="120" y1="130" x2="120" y2="210"/>
+        <!-- L-shapes -->
+        <polyline class="track" points="20,50 20,90 60,90"/>
+        <polyline class="track" points="300,130 260,130 260,170 300,170"/>
+        <polyline class="track" points="40,210 40,240 200,240 200,210"/>
+        <!-- glow halos -->
+        <circle class="node-glow" cx="80" cy="50" r="14"/>
+        <circle class="node-glow" cx="160" cy="130" r="14"/>
+        <circle class="node-glow" cx="240" cy="210" r="14"/>
+        <!-- nodes -->
+        <circle class="node" cx="80" cy="50" r="5"/>
+        <circle class="node" cx="160" cy="50" r="4"/>
+        <circle class="node" cx="240" cy="50" r="4"/>
+        <circle class="node" cx="80" cy="130" r="4"/>
+        <circle class="node" cx="160" cy="130" r="5"/>
+        <circle class="node" cx="240" cy="130" r="4"/>
+        <circle class="node" cx="120" cy="130" r="3"/>
+        <circle class="node" cx="80" cy="210" r="4"/>
+        <circle class="node" cx="160" cy="210" r="4"/>
+        <circle class="node" cx="240" cy="210" r="5"/>
+        <circle class="node" cx="120" cy="210" r="3"/>
+        <circle class="node" cx="20" cy="90" r="3"/>
+        <circle class="node" cx="60" cy="90" r="3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-num">02 — Skills</div>
+    <h2 class="section-title">Technical Arsenal</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">Networking</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Router Config</span>
+        <span class="skill-tag">Switch Config</span>
+        <span class="skill-tag">IPv4/IPv6</span>
+        <span class="skill-tag">DNS</span>
+        <span class="skill-tag">DHCP</span>
+        <span class="skill-tag">LAN/WAN</span>
+        <span class="skill-tag">Troubleshooting</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🖥️</div>
+      <div class="skill-name">Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Server Admin</span>
+        <span class="skill-tag">Hardware Diagnostics</span>
+        <span class="skill-tag">OS Config</span>
+        <span class="skill-tag">System Monitoring</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔐</div>
+      <div class="skill-name">Cybersecurity</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Threat Assessment</span>
+        <span class="skill-tag">Vuln Scanning</span>
+        <span class="skill-tag">Firewall Policies</span>
+        <span class="skill-tag">Access Control</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MS SQL Server</span>
+        <span class="skill-tag">DBMS Concepts</span>
+        <span class="skill-tag">Data Integrity</span>
+        <span class="skill-tag">Query Management</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">💻</div>
+      <div class="skill-name">Programming</div>
+      <div class="skill-tags">
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">Visual Basic</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Office &amp; Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MS Office Suite</span>
+        <span class="skill-tag">Documentation</span>
+        <span class="skill-tag">Presentations</span>
+        <span class="skill-tag">Communication</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div class="section-num">03 — Experience</div>
+    <h2 class="section-title">Work History</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date">March 2026</div>
+      <div class="timeline-role">ICT Network Engineer</div>
+        <div class="timeline-company">
+          <img src="images/dwp-logo.png" alt="DWP Technologies" class="company-logo" onerror="this.style.display='none'">
+          DWP Technologies — Karachi, Pakistan (Internship)
+        </div>
+      <ul class="timeline-list">
+        <li>Configured and monitored network devices including enterprise routers and switches</li>
+        <li>Applied network troubleshooting techniques — IP configuration and DNS resolution</li>
+        <li>Participated in security awareness training and assisted in reviewing firewall policies</li>
+        <li>Gained practical knowledge of data protection mechanisms and access control systems</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">June 2025 — Aug 2025</div>
+      <div class="timeline-role">System Specialist (Intern)</div>
+        <div class="timeline-company">
+          <img src="images/biut-logo.svg" alt="BIUT" class="company-logo" onerror="this.style.display='none'">
+          BIUT — Nawabshah, Pakistan
+        </div>
+      <ul class="timeline-list">
+        <li>Provided technical support and troubleshooting for hardware, software, and network issues</li>
+        <li>Assisted in system administration tasks including OS installation, configuration, and maintenance</li>
+        <li>Managed user accounts, access permissions, and system backups</li>
+        <li>Collaborated with the IT team to maintain infrastructure reliability and document procedures</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">June 2024 — July 2024</div>
+      <div class="timeline-role">Network Engineer</div>
+      <div class="timeline-company">
+        <img src="images/habib-logo.jpg" alt="Habib Sugar Mills" class="company-logo" onerror="this.style.display='none'">
+        Habib Sugar Mills Limited — Nawabshah, Pakistan (Internship)
+      </div>
+      <ul class="timeline-list">
+        <li>Managed admin-side operations and industry network infrastructure</li>
+        <li>Provided network support across production and distillery divisions</li>
+        <li>Assisted in configuring and maintaining network connectivity for industrial systems</li>
+        <li>Gained hands-on experience in enterprise-level network administration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-num">04 — Projects</div>
+      <h2 class="section-title">Key Work</h2>
+      <div class="section-line"></div>
+    </div>
+    <button class="add-project-btn" id="addProjectBtn">+ Add Project</button>
+  </div>
+  <div class="project-card reveal">
+    <div class="project-badge">Final Year Thesis</div>
+    <h3 class="project-title">ZEROSHIELD</h3>
+    <p class="project-desc">An AI-powered framework for behavior-based zero-day attack detection. Built to defend enterprise networks from unknown threats through intelligent pattern analysis and automated response.</p>
+    <ul class="project-points">
+      <li>Designed an AI-based framework to detect zero-day cyber threats via behavioral pattern analysis</li>
+      <li>Applicable to enterprise network security monitoring and automated incident response</li>
+      <li>Demonstrates deep understanding of network traffic analysis, system behavior modeling, and cybersecurity automation</li>
+      <li>Anomaly detection engine built to identify previously unseen attack vectors</li>
+    </ul>
+  </div>
+  <div class="project-card reveal">
+    <div class="project-badge" style="border-color:rgba(96,165,250,0.3);color:var(--accent)">AI / Security</div>
+    <h3 class="project-title">Sentinel IDS</h3>
+    <p class="project-desc">An AI-powered intrusion detection system for real-time network threat monitoring, classification, and explainable alerts. Deployed live with a full analytics dashboard.</p>
+    <ul class="project-points">
+      <li>Built machine learning model (RandomForest) trained on NSL-KDD dataset with 77.6% test accuracy</li>
+      <li>Real-time packet scanning, threat classification, and automated alert generation</li>
+      <li>Interactive dashboard with India-wide threat heatmap, live event feed, and analytics</li>
+      <li>Explainable AI verdicts with confidence scores and severity ratings</li>
+    </ul>
+    <a href="https://sentinel-ids.onrender.com/dashboard" target="_blank" class="btn-ghost">Live Demo ↗</a>
+  </div>
+  <div class="project-card reveal">
+    <div class="project-badge" style="border-color:rgba(52,211,153,0.3);color:var(--green)">Healthcare</div>
+    <h3 class="project-title">HealBook</h3>
+    <p class="project-desc">A healthcare platform connecting patients with verified doctors and dietitians for online and in-person consultations. Full-stack web application with real-time booking.</p>
+    <ul class="project-points">
+      <li>Built full-stack web application with real-time appointment booking and secure payment processing</li>
+      <li>Implemented practitioner verification system with profile management and scheduling</li>
+      <li>Designed responsive UI with search, filtering by specialty, language, and pricing</li>
+      <li>Deployed on Vercel with HIPAA-compliant video consultation integration</li>
+    </ul>
+    <a href="https://healbook-nine.vercel.app/" target="_blank" class="btn-ghost">Live Demo ↗</a>
+  </div>
+  <div class="project-card reveal">
+    <div class="project-badge" style="border-color:rgba(96,165,250,0.3);color:var(--accent)">Security</div>
+    <h3 class="project-title">IPS &amp; IDS System</h3>
+    <p class="project-desc">Designed and implemented a host-based Intrusion Prevention and Detection System capable of real-time threat monitoring, alert generation, and automated rule-based response.</p>
+    <ul class="project-points">
+      <li>Built rule-based detection engine to identify malicious patterns in system logs and network traffic</li>
+      <li>Implemented real-time alerting with automated response actions (block IP, terminate process, quarantine)</li>
+      <li>Designed modular architecture supporting custom rule definitions for varied threat landscapes</li>
+      <li>Tested against common attack vectors — port scans, brute force, and malware signatures</li>
+    </ul>
+  </div>
+  <div class="project-card reveal">
+    <div class="project-badge" style="border-color:rgba(96,165,250,0.3);color:var(--accent)">Networking</div>
+    <h3 class="project-title">Multi-Network Enterprise — Packet Tracer</h3>
+    <p class="project-desc">Architected a multi-site enterprise network topology in Cisco Packet Tracer, integrating VLANs, inter-VLAN routing, DHCP, DNS, and ACL-based security policies across three organizational departments.</p>
+    <ul class="project-points">
+      <li>Designed hierarchical network with core, distribution, and access layers for scalability</li>
+      <li>Configured VLAN segmentation (Finance, HR, IT) with inter-VLAN routing via multilayer switches</li>
+      <li>Implemented DHCP pools, DNS servers, and email services across subnets</li>
+      <li>Applied extended ACLs to enforce department-specific access policies and traffic filtering</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-header reveal">
+    <div class="section-num">05 — Achievements</div>
+    <h2 class="section-title">Recognition</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="achievements-grid">
+    <div class="achievement-card reveal">
+      <div class="achievement-num">01</div>
+      <div class="achievement-title">Ignite AI Wrapper Competition 2026</div>
+      <div class="achievement-desc">3rd Position — Sindh Region. Competed against leading Pakistan tech companies in the national AI innovation competition.</div>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-num">02</div>
+      <div class="achievement-title">International Conference Participant</div>
+      <div class="achievement-desc">Selected as a participant at the International Conference on Computing Science &amp; Technology.</div>
+    </div>
+    <div class="achievement-card reveal">
+      <div class="achievement-num">03</div>
+      <div class="achievement-title">HSSC A1 Grade — 96%</div>
+      <div class="achievement-desc">Achieved top grade in Higher Secondary School Certificate with a 96% score in the Pre-Medical stream.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <div class="section-num">06 — Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-card reveal">
+    <div class="edu-period">2022 — 2026</div>
+    <div class="edu-degree">Bachelor of Science — Computer Science</div>
+    <div class="edu-school">Quaid-e-Awam University of Engineering Science &amp; Technology (QUEST), Nawabshah</div>
+    <div class="edu-detail">Final Year Thesis: <strong style="color:var(--accent)">ZEROSHIELD</strong> — AI Framework for Behavior-Based Zero-Day Attack Detection</div>
+  </div>
+  <div class="edu-card reveal">
+    <div class="edu-period">2019 — 2021</div>
+    <div class="edu-degree">Higher Secondary School Certificate (Pre-Medical)</div>
+    <div class="edu-school">Higher Secondary School, Nawabshah</div>
+    <div class="edu-detail">Completed pre-medical studies with distinction.</div>
+    <span class="edu-grade">A1 Grade — 96%</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrapper">
+    <div class="section-header reveal" style="text-align:center">
+      <div class="section-num" style="text-align:center">07 — Contact</div>
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="section-line" style="margin:18px auto 0"></div>
+    </div>
+    <p class="contact-desc reveal">
+      I'm actively seeking opportunities in network engineering, infrastructure, and cybersecurity. Feel free to reach out — I respond promptly.
+    </p>
+    <div class="contact-links reveal">
+      <a href="mailto:ebadurrehman881@gmail.com" class="contact-link">
+        <span class="contact-icon">✉</span>ebadurrehman881@gmail.com
+      </a>
+      <a href="tel:+923322046126" class="contact-link">
+        <span class="contact-icon">📞</span>(+92) 332 204 6126
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-icon">📍</span>Nawabshah, Sindh
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">© 2026 Ebad-ur-Rehman Rajput</div>
+  <div class="footer-right">Infrastructure &amp; Network Engineer</div>
+</footer>
+
+<!-- Add Project Modal -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <h3>Add New Project</h3>
+    <label for="projName">Project Name *</label>
+    <input type="text" id="projName" placeholder="e.g. My Awesome Project">
+
+    <label for="projBadge">Badge Label *</label>
+    <input type="text" id="projBadge" placeholder="e.g. Security, AI/ML, Healthcare">
+
+    <label for="projDesc">Description *</label>
+    <textarea id="projDesc" placeholder="Brief description of the project..."></textarea>
+
+    <label for="projBullets">Key Features (one per line) *</label>
+    <textarea id="projBullets" placeholder="Built feature A&#10;Implemented feature B&#10;Deployed on platform C"></textarea>
+
+    <label for="projLive">Live Demo URL</label>
+    <input type="url" id="projLive" placeholder="https://example.com">
+
+    <label for="projGithub">GitHub URL</label>
+    <input type="url" id="projGithub" placeholder="https://github.com/...">
+
+    <div class="modal-actions">
+      <button class="btn-ghost" id="modalCancel">Cancel</button>
+      <button class="btn-primary" id="modalSave">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Mobile nav toggle ──
+const toggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+toggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  toggle.classList.toggle('open', open);
+  toggle.setAttribute('aria-expanded', String(open));
+});
+
+// Close menu when a link is clicked
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// ── Scroll reveal ──
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 70);
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => revealObs.observe(el));
+
+// ── Nav active link on scroll ──
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 90) current = s.id;
+  });
+  links.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+
+// ── Skill card tilt (desktop only) ──
+if (window.matchMedia('(pointer:fine)').matches) {
+  document.querySelectorAll('.skill-card, .project-card, .achievement-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `translateY(-5px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+}
+
+// ── Add Project Feature ──
+const addBtn = document.getElementById('addProjectBtn');
+const modal = document.getElementById('projectModal');
+const cancelBtn = document.getElementById('modalCancel');
+const saveBtn = document.getElementById('modalSave');
+const projectsSection = document.getElementById('projects');
+
+// Open modal
+addBtn.addEventListener('click', () => modal.classList.add('active'));
+
+// Close modal
+cancelBtn.addEventListener('click', () => modal.classList.remove('active'));
+modal.addEventListener('click', e => {
+  if (e.target === modal) modal.classList.remove('active');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') modal.classList.remove('active');
+});
+
+// Load saved projects from localStorage
+function loadProjects() {
+  const saved = JSON.parse(localStorage.getItem('customProjects') || '[]');
+  saved.forEach(p => renderProjectCard(p));
+}
+
+// Save projects to localStorage
+function saveProjects() {
+  const cards = projectsSection.querySelectorAll('.project-card.dynamic');
+  const projects = [];
+  cards.forEach(card => {
+    projects.push({
+      name: card.querySelector('.project-title').textContent,
+      badge: card.querySelector('.project-badge').textContent,
+      desc: card.querySelector('.project-desc').textContent,
+      bullets: Array.from(card.querySelectorAll('.project-points li'))
+                    .map(li => li.textContent),
+      live: card.querySelector('a[target="_blank"]')?.href || '',
+      github: card.dataset.github || ''
+    });
+  });
+  localStorage.setItem('customProjects', JSON.stringify(projects));
+}
+
+// Render a single project card
+function renderProjectCard(data) {
+  const card = document.createElement('div');
+  card.className = 'project-card reveal dynamic';
+  card.dataset.github = data.github || '';
+
+  const badgeColor = data.badge.toLowerCase().includes('health') ? 'rgba(52,211,153,0.3)' : 'rgba(96,165,250,0.3)';
+  const badgeTextColor = data.badge.toLowerCase().includes('health') ? 'var(--green)' : 'var(--accent)';
+
+  let linksHTML = '';
+  if (data.live) {
+    linksHTML += `<a href="${data.live}" target="_blank" class="btn-ghost">Live Demo ↗</a> `;
+  }
+  if (data.github) {
+    linksHTML += `<a href="${data.github}" target="_blank" class="btn-ghost" style="margin-left:8px">GitHub ↗</a>`;
+  }
+
+  card.innerHTML = `
+    <button class="delete-btn" title="Remove project">&times;</button>
+    <div class="project-badge" style="border-color:${badgeColor};color:${badgeTextColor}">${data.badge}</div>
+    <h3 class="project-title">${data.name}</h3>
+    <p class="project-desc">${data.desc}</p>
+    <ul class="project-points">
+      ${data.bullets.map(b => `<li>${b}</li>`).join('')}
+    </ul>
+    ${linksHTML}
+  `;
+
+  // Insert before the first static project card (ZEROSHIELD)
+  const firstStatic = projectsSection.querySelector('.project-card:not(.dynamic)');
+  projectsSection.insertBefore(card, firstStatic);
+
+  // Delete button handler
+  card.querySelector('.delete-btn').addEventListener('click', () => {
+    card.remove();
+    saveProjects();
+  });
+
+  // Re-observe for scroll reveal
+  revealObs.observe(card);
+}
+
+// Save button handler
+saveBtn.addEventListener('click', () => {
+  const name = document.getElementById('projName').value.trim();
+  const badge = document.getElementById('projBadge').value.trim();
+  const desc = document.getElementById('projDesc').value.trim();
+  const bulletsRaw = document.getElementById('projBullets').value.trim();
+  const live = document.getElementById('projLive').value.trim();
+  const github = document.getElementById('projGithub').value.trim();
+
+  if (!name || !badge || !desc || !bulletsRaw) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  const bullets = bulletsRaw.split('\n').map(b => b.trim()).filter(b => b);
+
+  renderProjectCard({ name, badge, desc, bullets, live, github });
+  saveProjects();
+
+  // Reset form
+  ['projName','projBadge','projDesc','projBullets','projLive','projGithub']
+    .forEach(id => document.getElementById(id).value = '');
+
+  modal.classList.remove('active');
+});
+
+// Load on page init
+loadProjects();
+</script>
+
+</body>
+</html>
