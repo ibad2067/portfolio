@@ -686,6 +686,205 @@ a:focus-visible, button:focus-visible {
 .project-card .delete-btn:hover {
   background:rgba(239,68,68,0.3); transform:scale(1.1);
 }
+
+/* ── Certifications ── */
+.certs-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(min(420px, 100%), 1fr));
+  gap:18px;
+}
+.cert-card {
+  border:1px solid var(--border);
+  background:var(--surface);
+  border-radius:var(--radius);
+  overflow:hidden;
+  position:relative;
+  transition:border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.cert-card:hover {
+  border-color:var(--accent);
+  transform:translateY(-3px);
+  box-shadow:0 0 48px rgba(96,165,250,0.08);
+}
+.cert-card .delete-btn {
+  position:absolute; top:12px; right:12px;
+  width:24px; height:24px; border-radius:50%;
+  background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3);
+  color:#ef4444; font-size:0.75rem; cursor:pointer;
+  display:none; align-items:center; justify-content:center;
+  transition:background 0.2s, transform 0.2s; z-index:10;
+}
+.cert-card.dynamic .delete-btn { display:flex; }
+.cert-card .delete-btn:hover {
+  background:rgba(239,68,68,0.3); transform:scale(1.1);
+}
+.cert-img-wrap {
+  position:relative;
+  cursor:zoom-in;
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.cert-img-wrap img {
+  display:block;
+  width:100%;
+  max-height:320px;
+  object-fit:cover;
+  transition:transform 0.4s;
+}
+.cert-card:hover .cert-img-wrap img { transform:scale(1.03); }
+.cert-zoom-hint {
+  position:absolute; right:10px; bottom:10px;
+  font-family:'Space Mono', monospace;
+  font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--accent); background:rgba(15,20,25,0.85);
+  border:1px solid var(--border); border-radius:2px;
+  padding:4px 10px;
+  opacity:0; transition:opacity 0.25s;
+}
+.cert-img-wrap:hover .cert-zoom-hint { opacity:1; }
+.cert-body { padding:clamp(18px, 3vw, 28px); }
+.cert-issuer-row {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:10px; margin-bottom:12px; flex-wrap:wrap;
+}
+.cert-issuer {
+  font-family:'Space Mono', monospace;
+  font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--accent); border:1px solid var(--border);
+  padding:4px 12px; border-radius:2px;
+}
+.cert-status {
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:'Space Mono', monospace;
+  font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--green);
+}
+.cert-status::before {
+  content:''; width:6px; height:6px; border-radius:50%;
+  background:var(--green); box-shadow:0 0 8px var(--green);
+}
+.cert-name {
+  font-weight:700; font-size:1.15rem; line-height:1.3;
+  margin-bottom:14px;
+}
+.cert-skills-title {
+  font-family:'Space Mono', monospace;
+  font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:8px;
+}
+.cert-skills { list-style:none; display:flex; flex-wrap:wrap; gap:6px; }
+.cert-skills li {
+  font-family:'Space Mono', monospace;
+  font-size:0.6rem; padding:3px 10px;
+  background:var(--panel); color:var(--muted);
+  border:1px solid var(--border); border-radius:2px;
+  letter-spacing:0.06em;
+  transition:color 0.25s, border-color 0.25s;
+}
+.cert-card:hover .cert-skills li { color:var(--accent); border-color:rgba(96,165,250,0.3); }
+
+/* Add certification slot */
+.add-cert-card {
+  border:1px dashed var(--border);
+  background:transparent;
+  border-radius:var(--radius);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:14px; min-height:300px;
+  cursor:pointer;
+  transition:border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.add-cert-card:hover {
+  border-color:var(--accent);
+  background:var(--faint);
+  transform:translateY(-3px);
+}
+.add-cert-plus {
+  width:56px; height:56px; border-radius:50%;
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.6rem; color:var(--accent);
+  transition:transform 0.3s, border-color 0.3s;
+}
+.add-cert-card:hover .add-cert-plus { transform:rotate(90deg); border-color:var(--accent); }
+.add-cert-label {
+  font-family:'Space Mono', monospace;
+  font-size:0.64rem; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--muted);
+}
+.add-cert-hint {
+  font-size:0.72rem; color:var(--muted); opacity:0.7;
+  max-width:250px; text-align:center; line-height:1.6;
+  padding:0 16px;
+}
+
+/* Certificate lightbox */
+.lightbox-overlay {
+  position:fixed; inset:0; z-index:3000;
+  background:rgba(5,8,15,0.94);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center; justify-content:center;
+  flex-direction:column; gap:16px;
+  padding:clamp(16px, 4vw, 48px);
+}
+.lightbox-overlay.active { display:flex; }
+.lightbox-overlay img {
+  max-width:min(1100px, 100%);
+  max-height:76vh;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:0 0 80px rgba(96,165,250,0.15);
+  object-fit:contain;
+}
+.lightbox-caption {
+  font-family:'Space Mono', monospace;
+  font-size:0.7rem; letter-spacing:0.12em; color:var(--muted);
+  text-align:center; text-transform:uppercase;
+}
+.lightbox-close {
+  position:absolute; top:20px; right:24px;
+  width:42px; height:42px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--border);
+  color:var(--text); font-size:1.2rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:border-color 0.25s, transform 0.25s;
+}
+.lightbox-close:hover { border-color:var(--accent); transform:rotate(90deg); }
+
+/* Cert modal file input */
+.cert-file-label {
+  display:block; font-family:'Space Mono', monospace;
+  font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:6px; margin-top:16px;
+}
+.cert-file-input {
+  display:block; width:100%;
+  font-family:'Space Grotesk', sans-serif; font-size:0.78rem;
+  color:var(--muted);
+}
+.cert-file-input::file-selector-button {
+  font-family:'Space Mono', monospace;
+  font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase;
+  padding:8px 16px; margin-right:14px;
+  background:var(--surface2); color:var(--accent);
+  border:1px solid var(--border); border-radius:var(--radius);
+  cursor:pointer; transition:background 0.25s, border-color 0.25s;
+}
+.cert-file-input::file-selector-button:hover {
+  background:var(--faint); border-color:var(--accent);
+}
+.cert-file-preview {
+  margin-top:10px; max-height:120px; border-radius:var(--radius);
+  border:1px solid var(--border); display:none;
+}
+
+/* Cert section responsive */
+@media(max-width:520px) {
+  .cert-zoom-hint { display:none; }
+  .add-cert-card { min-height:200px; }
+}
 </style>
 </head>
 <body>
@@ -701,6 +900,7 @@ a:focus-visible, button:focus-visible {
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
+    <a href="#certifications">Certs</a>
     <a href="#achievements">Awards</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
@@ -1006,10 +1206,101 @@ a:focus-visible, button:focus-visible {
   </div>
 </section>
 
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-num">05 — Certifications</div>
+      <h2 class="section-title">Verified Credentials</h2>
+      <div class="section-line"></div>
+    </div>
+    <button class="add-project-btn" id="addCertBtn">+ Add Certification</button>
+  </div>
+  <div class="certs-grid" id="certsGrid">
+
+    <!-- Cert 1: Cybersecurity & OS -->
+    <div class="cert-card reveal">
+      <div class="cert-img-wrap" data-caption="Introduction to Cybersecurity and Operating System">
+        <img src="images/certificates/cybersecurity-os.jpg" alt="Introduction to Cybersecurity and Operating System certificate" onerror="this.parentElement.style.display='none'">
+        <span class="cert-zoom-hint">🔍 View Full Certificate</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-issuer-row">
+          <span class="cert-issuer">Microsoft</span>
+          <span class="cert-status">Verified</span>
+        </div>
+        <h3 class="cert-name">Introduction to Cybersecurity and Operating System</h3>
+        <div class="cert-skills-title">Skills Covered</div>
+        <ul class="cert-skills">
+          <li>Cybersecurity Fundamentals</li>
+          <li>Operating System Basics</li>
+          <li>Threats &amp; Vulnerabilities</li>
+          <li>Access Control</li>
+          <li>System Administration</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cert 2: Network & Cloud -->
+    <div class="cert-card reveal">
+      <div class="cert-img-wrap" data-caption="Introduction to Network and Cloud Computing">
+        <img src="images/certificates/network-cloud.jpg" alt="Introduction to Network and Cloud Computing certificate" onerror="this.parentElement.style.display='none'">
+        <span class="cert-zoom-hint">🔍 View Full Certificate</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-issuer-row">
+          <span class="cert-issuer">Google</span>
+          <span class="cert-status">Verified</span>
+        </div>
+        <h3 class="cert-name">Introduction to Network and Cloud Computing</h3>
+        <div class="cert-skills-title">Skills Covered</div>
+        <ul class="cert-skills">
+          <li>Networking Fundamentals</li>
+          <li>IP Addressing &amp; DNS</li>
+          <li>Cloud Concepts (IaaS/PaaS/SaaS)</li>
+          <li>Protocols &amp; Topologies</li>
+          <li>Cloud Services</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cert 3: MERN Stack -->
+    <div class="cert-card reveal">
+      <div class="cert-img-wrap" data-caption="MERN Stack Development">
+        <img src="images/certificates/mern-stack.jpg" alt="MERN Stack Development certificate" onerror="this.parentElement.style.display='none'">
+        <span class="cert-zoom-hint">🔍 View Full Certificate</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-issuer-row">
+          <span class="cert-issuer">MERN Stack</span>
+          <span class="cert-status">Verified</span>
+        </div>
+        <h3 class="cert-name">MERN Stack Development</h3>
+        <div class="cert-skills-title">Skills Covered</div>
+        <ul class="cert-skills">
+          <li>MongoDB</li>
+          <li>Express.js</li>
+          <li>React</li>
+          <li>Node.js</li>
+          <li>REST APIs</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Empty slot for the next (in-progress) certification -->
+    <div class="add-cert-card" id="addCertSlot" role="button" tabindex="0" aria-label="Add certification">
+      <div class="add-cert-plus">+</div>
+      <div class="add-cert-label">Add Certification</div>
+      <div class="add-cert-hint">Your next certificate goes here — click to add it live, right from the browser.</div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
   <div class="section-header reveal">
-    <div class="section-num">05 — Achievements</div>
+    <div class="section-num">06 — Achievements</div>
     <h2 class="section-title">Recognition</h2>
     <div class="section-line"></div>
   </div>
@@ -1035,7 +1326,7 @@ a:focus-visible, button:focus-visible {
 <!-- EDUCATION -->
 <section id="education">
   <div class="section-header reveal">
-    <div class="section-num">06 — Education</div>
+    <div class="section-num">07 — Education</div>
     <h2 class="section-title">Academic Background</h2>
     <div class="section-line"></div>
   </div>
@@ -1058,7 +1349,7 @@ a:focus-visible, button:focus-visible {
 <section id="contact">
   <div class="contact-wrapper">
     <div class="section-header reveal" style="text-align:center">
-      <div class="section-num" style="text-align:center">07 — Contact</div>
+      <div class="section-num" style="text-align:center">08 — Contact</div>
       <h2 class="section-title">Let's Connect</h2>
       <div class="section-line" style="margin:18px auto 0"></div>
     </div>
@@ -1111,6 +1402,37 @@ a:focus-visible, button:focus-visible {
       <button class="btn-primary" id="modalSave">Save Project</button>
     </div>
   </div>
+</div>
+
+<!-- Add Certification Modal -->
+<div class="modal-overlay" id="certModal">
+  <div class="modal">
+    <h3>Add Certification</h3>
+    <label for="certName">Certificate Name *</label>
+    <input type="text" id="certName" placeholder="e.g. Introduction to Cloud Computing">
+
+    <label for="certIssuer">Issued By *</label>
+    <input type="text" id="certIssuer" placeholder="e.g. Microsoft, Google, Coursera">
+
+    <label for="certSkills">Skills Covered (one per line) *</label>
+    <textarea id="certSkills" placeholder="Networking Fundamentals&#10;Cloud Concepts&#10;Security Basics"></textarea>
+
+    <label class="cert-file-label" for="certImage">Certificate Image *</label>
+    <input class="cert-file-input" type="file" id="certImage" accept="image/*">
+    <img class="cert-file-preview" id="certImagePreview" alt="Certificate preview">
+
+    <div class="modal-actions">
+      <button class="btn-ghost" id="certCancel">Cancel</button>
+      <button class="btn-primary" id="certSave">Save Certification</button>
+    </div>
+  </div>
+</div>
+
+<!-- Certificate Lightbox -->
+<div class="lightbox-overlay" id="certLightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close certificate view">&times;</button>
+  <img id="lightboxImg" alt="Certificate full view">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
 <script>
@@ -1285,6 +1607,167 @@ saveBtn.addEventListener('click', () => {
 
 // Load on page init
 loadProjects();
+
+// ── Add Certification Feature ──
+const addCertBtn = document.getElementById('addCertBtn');
+const addCertSlot = document.getElementById('addCertSlot');
+const certModal = document.getElementById('certModal');
+const certCancel = document.getElementById('certCancel');
+const certSave = document.getElementById('certSave');
+const certImageInput = document.getElementById('certImage');
+const certPreview = document.getElementById('certImagePreview');
+const certsGrid = document.getElementById('certsGrid');
+const lightbox = document.getElementById('certLightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+
+let certImageData = '';
+let customCerts = JSON.parse(localStorage.getItem('customCerts') || '[]');
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+// Open / close cert modal
+function openCertModal() { certModal.classList.add('active'); }
+addCertBtn.addEventListener('click', openCertModal);
+addCertSlot.addEventListener('click', openCertModal);
+addCertSlot.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCertModal(); }
+});
+certCancel.addEventListener('click', () => certModal.classList.remove('active'));
+certModal.addEventListener('click', e => {
+  if (e.target === certModal) certModal.classList.remove('active');
+});
+
+// Image file → compressed dataURL (fits localStorage limits)
+certImageInput.addEventListener('change', () => {
+  const file = certImageInput.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const maxW = 1400;
+      const scale = Math.min(1, maxW / img.width);
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      certImageData = canvas.toDataURL('image/jpeg', 0.82);
+      certPreview.src = certImageData;
+      certPreview.style.display = 'block';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// Render one dynamic certification card
+function renderCertCard(data, persist = true) {
+  const card = document.createElement('div');
+  card.className = 'cert-card reveal dynamic';
+  card.dataset.id = data.id;
+  card.innerHTML = `
+    <button class="delete-btn" title="Remove certification">&times;</button>
+    <div class="cert-img-wrap" data-caption="${escapeHtml(data.name)}">
+      <img src="${data.image}" alt="${escapeHtml(data.name)} certificate">
+      <span class="cert-zoom-hint">🔍 View Full Certificate</span>
+    </div>
+    <div class="cert-body">
+      <div class="cert-issuer-row">
+        <span class="cert-issuer">${escapeHtml(data.issuer)}</span>
+        <span class="cert-status">Verified</span>
+      </div>
+      <h3 class="cert-name">${escapeHtml(data.name)}</h3>
+      <div class="cert-skills-title">Skills Covered</div>
+      <ul class="cert-skills">
+        ${data.skills.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+
+  certsGrid.insertBefore(card, addCertSlot);
+
+  card.querySelector('.delete-btn').addEventListener('click', () => {
+    card.remove();
+    customCerts = customCerts.filter(c => c.id !== data.id);
+    persistCerts();
+  });
+
+  wireLightbox(card);
+  revealObs.observe(card);
+
+  if (persist) {
+    customCerts.push(data);
+    persistCerts();
+  }
+}
+
+function persistCerts() {
+  try {
+    localStorage.setItem('customCerts', JSON.stringify(customCerts));
+  } catch (err) {
+    alert('Could not save: browser storage is full (image too large).');
+  }
+}
+
+// Save button
+certSave.addEventListener('click', () => {
+  const name = document.getElementById('certName').value.trim();
+  const issuer = document.getElementById('certIssuer').value.trim();
+  const skillsRaw = document.getElementById('certSkills').value.trim();
+
+  if (!name || !issuer || !skillsRaw || !certImageData) {
+    alert('Please fill in all fields and select a certificate image.');
+    return;
+  }
+
+  const skills = skillsRaw.split('\n').map(s => s.trim()).filter(Boolean);
+
+  renderCertCard({
+    id: Date.now().toString(),
+    name, issuer, skills,
+    image: certImageData
+  });
+
+  ['certName', 'certIssuer', 'certSkills'].forEach(id => document.getElementById(id).value = '');
+  certImageInput.value = '';
+  certPreview.style.display = 'none';
+  certImageData = '';
+  certModal.classList.remove('active');
+});
+
+// Load saved certifications
+customCerts.forEach(c => renderCertCard(c, false));
+
+// ── Certificate Lightbox ──
+function openLightbox(src, caption) {
+  lightboxImg.src = src;
+  lightboxCaption.textContent = caption || '';
+  lightbox.classList.add('active');
+}
+function closeLightbox() { lightbox.classList.remove('active'); }
+
+function wireLightbox(root) {
+  root.querySelectorAll('.cert-img-wrap').forEach(w => {
+    if (w.dataset.wired) return;
+    w.dataset.wired = '1';
+    w.addEventListener('click', () => {
+      const img = w.querySelector('img');
+      if (img && img.src) openLightbox(img.src, w.dataset.caption);
+    });
+  });
+}
+wireLightbox(document);
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeLightbox(); certModal.classList.remove('active'); }
+});
 </script>
 
 </body>
