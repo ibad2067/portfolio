@@ -18,11 +18,13 @@
 ---
 
 ## Technical Structure
-- **Single-file architecture:** `index.html` (~1266 lines) — all HTML, CSS (inline `<style>`), and JS (inline `<script>`) in one file
+- **Single-file architecture:** `index.html` (~1870 lines) — all HTML, CSS (inline `<style>`), and JS (inline `<script>`) in one file
 - **Fonts:** Space Grotesk (headings/body) + Space Mono (monospace/labels) via Google Fonts CDN
-- **Images:** `images/` directory with company logos and project screenshots
+- **Images:** `images/` directory with profile photo, company logos, project screenshots, and certificates
+  - `profile.png` — Hero photo (arms crossed, green gradient circle)
   - `dwp-logo.png`, `habib-logo.jpg`, `biut-logo.svg` — company logos
   - `ips-ids-system.png`, `multi-site-1.png`, `multi-site-2.png`, `multi-site-topology.png` — project assets
+  - `certificates/os-security.png`, `certificates/network-cloud.png`, `certificates/mern-stack.png` — certification images
 - **No build step:** Pure static HTML/CSS/JS, no frameworks, no bundler
 - **Deployment:** GitHub Pages serves `index.html` from repo root
 
@@ -52,16 +54,30 @@
 ---
 
 ## Sections (in order)
-1. **Nav** — Fixed top bar with "ER." logo, nav links (About, Skills, Experience, Projects, Awards, Education, Contact), mobile hamburger
-2. **Hero** — Name, title "Infrastructure & Network Engineer", description, CTA buttons, side stats (3rd Ignite AI, 96% HSSC, 4+ years)
+1. **Nav** — Fixed top bar with "ER." logo, nav links (About, Skills, Experience, Projects, Certs, Awards, Education, Contact), green "Hire Me" pill, mobile hamburger
+2. **Hero** — 3D photo card (mouse tilt, `#photoCard`) + `// System Profile` tag, "Hello, I'm Ebad-ur-Rehman Rajput", bio, 3 skill chips (with hover tilt), View My Work / Contact Me CTAs, animated glow orbs (`.hero-orb-a/b`)
 3. **About** (01) — Bio, contact info grid, circuit board SVG visual
 4. **Skills** (02) — 6 skill cards: Networking, Infrastructure, Cybersecurity, Databases, Programming, Office & Soft Skills
 5. **Experience** (03) — Timeline with 3 internships
 6. **Projects** (04) — 5 project cards + "+ Add Project" button with modal
-7. **Achievements** (05) — 3 achievement cards
-8. **Education** (06) — 2 education cards (BS CS + HSSC)
-9. **Contact** (07) — Email, phone, location links
-10. **Footer** — Copyright line
+7. **Certifications** (05) — 3 verified cert cards (image + lightbox, issuer badge, date, Verify link, skills tags) + "+ Add Certification" dashed slot → modal (localStorage `customCerts`)
+8. **Achievements** (06) — 3 achievement cards
+9. **Education** (07) — 2 education cards (BS CS + HSSC)
+10. **Contact** (08) — Email, phone, location links
+11. **Footer** — Copyright line
+
+---
+
+## Certifications (real, verified)
+1. **Introduction to Computers and Operating Systems and Security** — Microsoft via Coursera, Issued Oct 4, 2026
+   - Verify: https://coursera.org/verify/T7FZY0PRQ9QW
+   - Image: `images/certificates/os-security.png`
+2. **Introduction to Networking and Cloud Computing** — Microsoft via Coursera, Issued Oct 7, 2026
+   - Verify: https://coursera.org/verify/70ZDW0AB5IY
+   - Image: `images/certificates/network-cloud.png`
+3. **MERN Stack Development** — Sukkur IBA University / IS&T Dept, Govt of Sindh (IT Industry Readiness Bootcamp at QUEST Nawabshah)
+   - Verify: https://verifybootcamp.netlify.app/certificate/4540294379791
+   - Image: `images/certificates/mern-stack.png`
 
 ---
 
@@ -130,7 +146,10 @@
 
 ## Interactive Features
 - **Add Project Modal:** "+ Add Project" button opens a form (name, badge, description, bullets, live/GitHub URLs), saves to localStorage, renders dynamic cards with delete buttons
-- **Scroll Reveal:** IntersectionObserver adds `.visible` class to `.reveal` elements for fade-in on scroll (currently set to be visible by default as a fallback — opacity:0 removed to fix blank page bug)
+- **Add Certification Modal:** "+ Add Certification" slot/button opens form (name, issuer, skills, image upload). Image compressed via canvas → dataURL → localStorage `customCerts`. Esc closes modal.
+- **Cert Lightbox:** Clicking a cert image opens full-size view with caption; Esc closes.
+- **Hero Photo Tilt:** Mouse-move 3D tilt on `#photoCard` (perspective on `.photo-col`); skill chips have hover tilt.
+- **Scroll Reveal:** IntersectionObserver adds `.visible` class to `.reveal` elements for fade-in on scroll (`.reveal` starts visible as fallback — opacity:0 removed to fix blank page bug)
 - **Nav Active Link:** Highlights current section on scroll
 - **Skill Card Tilt:** 3D tilt effect on hover (desktop only, pointer:fine media query)
 - **Mobile Nav:** Hamburger toggle with slide-down drawer
@@ -141,10 +160,9 @@
 - All CSS is inline in `<style>` tag (no external stylesheets)
 - Sections alternate between `var(--bg)` and `var(--surface)` backgrounds with border separators
 - `.reveal` class: transition-based scroll animation (opacity + transform), currently starts visible
-- Hero elements: were using `opacity:0` + CSS `@keyframes fadeUp` animations — **these were removed** to fix a persistent blank page issue on deployment
-- `body::before` (SVG noise texture) and `body::after` (grid pattern) pseudo-elements were **removed** to fix blank page
-- `@media(prefers-reduced-motion:reduce)` override was **removed** to fix blank page
-- Responsive breakpoints: 1024px (hide hero stats), 768px (mobile nav, single-column about), 520px (compact layout, full-width buttons), 480px (contact stack)
+- Hero redesigned to match 3D reference portfolio: photo card with tilt, glow orbs, skill chips (all animations restored after `</style>` fix)
+- `body::before` (SVG noise texture) and `body::after` (grid pattern) pseudo-elements exist and work now that `</style>` is closed
+- Responsive breakpoints: 1024px (hide hero stats), 768px (mobile nav, single-column about, stack photo card), 520px (compact layout, full-width buttons), 480px (contact stack)
 
 ---
 
@@ -190,11 +208,12 @@ git push origin master
 
 ## File Structure
 ```
-D:\portfolio\
-  index.html          — Main portfolio file (all HTML/CSS/JS)
+C:\Users\Mehbob\Downloads\ebad-portfolio\   (clone of ibad2067/portfolio)
+  index.html          — Main portfolio file (all HTML/CSS/JS, ~1870 lines)
   AGENTS.md           — This context file
   .gitignore          — Ignores OS files, IDE files, .env, node_modules, .vercel
   images/
+    profile.png       — Hero profile photo
     dwp-logo.png      — DWP Technologies logo
     habib-logo.jpg    — Habib Sugar Mills logo
     biut-logo.svg     — BIUT logo
@@ -202,4 +221,20 @@ D:\portfolio\
     multi-site-1.png
     multi-site-2.png
     multi-site-topology.png
+    certificates/
+      os-security.png     — Microsoft/Coursera OS & Security cert
+      network-cloud.png   — Microsoft/Coursera Networking & Cloud cert
+      mern-stack.png      — Sukkur IBA MERN Stack cert
 ```
+
+---
+
+## Source Assets (on disk, not in repo)
+- Cert/profile screenshots: `C:\Users\Mehbob\OneDrive\Pictures\Screenshots 1\`
+  - `Screenshot (242).png` → profile photo (copied to `images/profile.png`)
+  - `Screenshot (244).png` → OS & Security cert
+  - `Screenshot (243).png` → Networking & Cloud cert
+  - `Screenshot (246).png` → MERN Stack cert
+- Old portfolio history: restored via `git clone https://github.com/ibad2067/portfolio.git`
+- Design reference: 3D portfolio (Sushmita Dasari style) — dark ambient glow, photo card, skill chips, Hire Me pill
+- Note: A separate Vite/React/Three.js project exists at `Downloads\portfolio` — NOT in use; user chose the old HTML portfolio
