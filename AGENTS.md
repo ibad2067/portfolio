@@ -21,10 +21,10 @@
 - **Single-file architecture:** `index.html` (~1870 lines) — all HTML, CSS (inline `<style>`), and JS (inline `<script>`) in one file
 - **Fonts:** Space Grotesk (headings/body) + Space Mono (monospace/labels) via Google Fonts CDN
 - **Images:** `images/` directory with profile photo, company logos, project screenshots, and certificates
-  - `profile.png` — Hero photo (arms crossed, green gradient circle)
+  - `profile.jpg` — Hero photo (arms crossed, green gradient circle)
   - `dwp-logo.png`, `habib-logo.jpg`, `biut-logo.svg` — company logos
   - `ips-ids-system.png`, `multi-site-1.png`, `multi-site-2.png`, `multi-site-topology.png` — project assets
-  - `certificates/os-security.png`, `certificates/network-cloud.png`, `certificates/mern-stack.png` — certification images
+  - `certificates/os-security.jpg`, `certificates/network-cloud.jpg`, `certificates/mern-stack.jpg` — certification images
 - **No build step:** Pure static HTML/CSS/JS, no frameworks, no bundler
 - **Deployment:** GitHub Pages serves `index.html` from repo root
 
@@ -71,13 +71,13 @@
 ## Certifications (real, verified)
 1. **Introduction to Computers and Operating Systems and Security** — Microsoft via Coursera, Issued Oct 4, 2026
    - Verify: https://coursera.org/verify/T7FZY0PRQ9QW
-   - Image: `images/certificates/os-security.png`
+   - Image: `images/certificates/os-security.jpg`
 2. **Introduction to Networking and Cloud Computing** — Microsoft via Coursera, Issued Oct 7, 2026
    - Verify: https://coursera.org/verify/70ZDW0AB5IY
-   - Image: `images/certificates/network-cloud.png`
+   - Image: `images/certificates/network-cloud.jpg`
 3. **MERN Stack Development** — Sukkur IBA University / IS&T Dept, Govt of Sindh (IT Industry Readiness Bootcamp at QUEST Nawabshah)
    - Verify: https://verifybootcamp.netlify.app/certificate/4540294379791
-   - Image: `images/certificates/mern-stack.png`
+   - Image: `images/certificates/mern-stack.jpg`
 
 ---
 
@@ -213,7 +213,7 @@ C:\Users\Mehbob\Downloads\ebad-portfolio\   (clone of ibad2067/portfolio)
   AGENTS.md           — This context file
   .gitignore          — Ignores OS files, IDE files, .env, node_modules, .vercel
   images/
-    profile.png       — Hero profile photo
+    profile.jpg       — Hero profile photo
     dwp-logo.png      — DWP Technologies logo
     habib-logo.jpg    — Habib Sugar Mills logo
     biut-logo.svg     — BIUT logo
@@ -222,16 +222,16 @@ C:\Users\Mehbob\Downloads\ebad-portfolio\   (clone of ibad2067/portfolio)
     multi-site-2.png
     multi-site-topology.png
     certificates/
-      os-security.png     — Microsoft/Coursera OS & Security cert
-      network-cloud.png   — Microsoft/Coursera Networking & Cloud cert
-      mern-stack.png      — Sukkur IBA MERN Stack cert
+      os-security.jpg     — Microsoft/Coursera OS & Security cert
+      network-cloud.jpg   — Microsoft/Coursera Networking & Cloud cert
+      mern-stack.jpg      — Sukkur IBA MERN Stack cert
 ```
 
 ---
 
 ## Source Assets (on disk, not in repo)
 - Cert/profile screenshots: `C:\Users\Mehbob\OneDrive\Pictures\Screenshots 1\`
-  - `Screenshot (242).png` → profile photo (copied to `images/profile.png`)
+  - `Screenshot (242).png` → profile photo (copied to `images/profile.jpg`)
   - `Screenshot (244).png` → OS & Security cert
   - `Screenshot (243).png` → Networking & Cloud cert
   - `Screenshot (246).png` → MERN Stack cert
