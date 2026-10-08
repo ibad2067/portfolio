@@ -21,7 +21,7 @@
 - **Single-file architecture:** `index.html` (~1870 lines) — all HTML, CSS (inline `<style>`), and JS (inline `<script>`) in one file
 - **Fonts:** Space Grotesk (headings/body) + Space Mono (monospace/labels) via Google Fonts CDN
 - **Images:** `images/` directory with profile photo, company logos, project screenshots, and certificates
-  - `profile.jpg` — Hero photo (arms crossed, green gradient circle)
+  - `profile.jpg` — Hero photo (navy blazer office headshot, 1000x1000, source `Downloads\pfp new.jpg`)
   - `dwp-logo.png`, `habib-logo.jpg`, `biut-logo.svg` — company logos
   - `ips-ids-system.png`, `multi-site-1.png`, `multi-site-2.png`, `multi-site-topology.png` — project assets
   - `certificates/os-security.jpg`, `certificates/network-cloud.jpg`, `certificates/mern-stack.jpg` — certification images
@@ -30,26 +30,28 @@
 
 ---
 
-## Design Tokens (Dark Theme)
+## Design Tokens (Soft Charcoal Theme)
 ```css
 :root {
-  --bg:       #0f1419;     /* main background - dark navy */
-  --surface:  #1a2030;     /* card/section bg */
-  --surface2: #1e2738;     /* input bg */
-  --panel:    #252f3f;     /* tag bg */
+  --bg:       #22262d;     /* main background - soft charcoal */
+  --surface:  #2a2f38;     /* card/section bg */
+  --surface2: #31363f;     /* input bg */
+  --panel:    #383e48;     /* tag bg */
   --accent:   #60a5fa;     /* primary blue */
   --accent2:  #818cf8;     /* secondary indigo */
   --accent3:  #34d399;     /* green accent */
   --green:    #34d399;     /* same as accent3 */
-  --text:     #e2e8f0;     /* main text - light gray */
-  --muted:    #8892a4;     /* secondary text */
-  --faint:    rgba(96,165,250,0.08);  /* hover bg */
-  --border:   rgba(96,165,250,0.15);  /* borders */
+  --text:     #e8ecf2;     /* main text - light gray */
+  --muted:    #a0a9b7;     /* secondary text */
+  --faint:    rgba(96,165,250,0.10);  /* hover bg */
+  --border:   rgba(96,165,250,0.20);  /* borders */
   --glow:     rgba(96,165,250,0.2);   /* glow effects */
   --radius:   4px;
   --nav-h:    64px;
 }
 ```
+- Hardcoded dark values also updated to charcoal: nav/drawer/zoom-hint `rgba(34,38,45,*)`, lightbox `rgba(24,27,33,0.96)`, photo-frame gradient `#363f50 → #242931`
+- Accents (blue/green), red `#ef4444`, on-photo pill `rgba(8,11,17,0.82)` intentionally unchanged
 
 ---
 
@@ -213,7 +215,7 @@ C:\Users\Mehbob\Downloads\ebad-portfolio\   (clone of ibad2067/portfolio)
   AGENTS.md           — This context file
   .gitignore          — Ignores OS files, IDE files, .env, node_modules, .vercel
   images/
-    profile.jpg       — Hero profile photo
+    profile.jpg       — Hero profile photo (navy blazer headshot)
     dwp-logo.png      — DWP Technologies logo
     habib-logo.jpg    — Habib Sugar Mills logo
     biut-logo.svg     — BIUT logo
@@ -231,7 +233,8 @@ C:\Users\Mehbob\Downloads\ebad-portfolio\   (clone of ibad2067/portfolio)
 
 ## Source Assets (on disk, not in repo)
 - Cert/profile screenshots: `C:\Users\Mehbob\OneDrive\Pictures\Screenshots 1\`
-  - `Screenshot (242).png` → profile photo (copied to `images/profile.jpg`)
+  - `Downloads\pfp new.jpg` — current profile photo (copied/compressed to `images/profile.jpg`)
+  - Cert screenshots 243/244/246 → certificates (verified correct via Windows OCR: network-cloud/os-security/mern-stack)
   - `Screenshot (244).png` → OS & Security cert
   - `Screenshot (243).png` → Networking & Cloud cert
   - `Screenshot (246).png` → MERN Stack cert

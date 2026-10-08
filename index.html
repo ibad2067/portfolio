@@ -6,20 +6,20 @@
 <title>Ebad-ur-Rehman Rajput — Infrastructure & Network Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
-/* ── TOKENS – professional dark palette ── */
+/* ── TOKENS – soft charcoal palette ── */
 :root {
-  --bg:       #0f1419;
-  --surface:  #1a2030;
-  --surface2: #1e2738;
-  --panel:    #252f3f;
+  --bg:       #22262d;
+  --surface:  #2a2f38;
+  --surface2: #31363f;
+  --panel:    #383e48;
   --accent:   #60a5fa;
   --accent2:  #818cf8;
   --accent3:  #34d399;
   --green:    #34d399;
-  --text:     #e2e8f0;
-  --muted:    #8892a4;
-  --faint:    rgba(96,165,250,0.08);
-  --border:   rgba(96,165,250,0.15);
+  --text:     #e8ecf2;
+  --muted:    #a0a9b7;
+  --faint:    rgba(96,165,250,0.10);
+  --border:   rgba(96,165,250,0.20);
   --glow:     rgba(96,165,250,0.2);
   --radius:   4px;
   --nav-h:    64px;
@@ -59,7 +59,7 @@ nav {
   padding:0 clamp(20px, 5vw, 60px);
   display:flex; align-items:center; justify-content:space-between;
   backdrop-filter:blur(24px);
-  background:rgba(15,20,25,0.88);
+  background:rgba(34,38,45,0.90);
   border-bottom:1px solid var(--border);
 }
 
@@ -118,7 +118,7 @@ nav {
   .nav-links {
     display:none; flex-direction:column; gap:0;
     position:fixed; top:var(--nav-h); left:0; right:0;
-    background:rgba(15,20,25,0.98);
+    background:rgba(34,38,45,0.98);
     border-bottom:1px solid var(--border);
     padding:12px 0;
   }
@@ -185,7 +185,7 @@ nav {
   border-radius:23px;
   overflow:hidden;
   aspect-ratio:4 / 4.5;
-  background:radial-gradient(circle at 30% 25%, #243044 0%, #12171f 70%);
+  background:radial-gradient(circle at 30% 25%, #363f50 0%, #242931 70%);
 }
 .photo-fallback {
   position:absolute; inset:0;
@@ -800,7 +800,7 @@ a:focus-visible, button:focus-visible {
   position:absolute; right:10px; bottom:10px;
   font-family:'Space Mono', monospace;
   font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--accent); background:rgba(15,20,25,0.85);
+  color:var(--accent); background:rgba(34,38,45,0.92);
   border:1px solid var(--border); border-radius:2px;
   padding:4px 10px;
   opacity:0; transition:opacity 0.25s;
@@ -902,7 +902,7 @@ a:focus-visible, button:focus-visible {
 /* Certificate lightbox */
 .lightbox-overlay {
   position:fixed; inset:0; z-index:3000;
-  background:rgba(5,8,15,0.94);
+  background:rgba(24,27,33,0.96);
   backdrop-filter:blur(8px);
   display:none;
   align-items:center; justify-content:center;
