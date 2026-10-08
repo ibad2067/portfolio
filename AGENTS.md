@@ -18,10 +18,10 @@
 ---
 
 ## Technical Structure
-- **Single-file architecture:** `index.html` (~1870 lines) — all HTML, CSS (inline `<style>`), and JS (inline `<script>`) in one file
+- **Single-file architecture:** `index.html` (~1970 lines) — all HTML, CSS (inline `<style>`), and JS (inline `<script>`) in one file
 - **Fonts:** Space Grotesk (headings/body) + Space Mono (monospace/labels) via Google Fonts CDN
 - **Images:** `images/` directory with profile photo, company logos, project screenshots, and certificates
-  - `profile.jpg` — Hero photo (navy blazer office headshot, 1000x1000, source `Downloads\pfp new.jpg`)
+  - `profile.jpg` — Hero photo (arms crossed, green circle background, 800x800, source `Screenshot (245).png` white-card crop)
   - `dwp-logo.png`, `habib-logo.jpg`, `biut-logo.svg` — company logos
   - `ips-ids-system.png`, `multi-site-1.png`, `multi-site-2.png`, `multi-site-topology.png` — project assets
   - `certificates/os-security.jpg`, `certificates/network-cloud.jpg`, `certificates/mern-stack.jpg` — certification images
@@ -30,43 +30,46 @@
 
 ---
 
-## Design Tokens (Soft Charcoal Theme)
+## Design Tokens (True Light Theme)
 ```css
 :root {
-  --bg:       #22262d;     /* main background - soft charcoal */
-  --surface:  #2a2f38;     /* card/section bg */
-  --surface2: #31363f;     /* input bg */
-  --panel:    #383e48;     /* tag bg */
-  --accent:   #60a5fa;     /* primary blue */
-  --accent2:  #818cf8;     /* secondary indigo */
-  --accent3:  #34d399;     /* green accent */
-  --green:    #34d399;     /* same as accent3 */
-  --text:     #e8ecf2;     /* main text - light gray */
-  --muted:    #a0a9b7;     /* secondary text */
-  --faint:    rgba(96,165,250,0.10);  /* hover bg */
-  --border:   rgba(96,165,250,0.20);  /* borders */
-  --glow:     rgba(96,165,250,0.2);   /* glow effects */
-  --radius:   4px;
+  --bg:       #eef1f5;     /* main background - light gray */
+  --surface:  #ffffff;     /* card/section bg */
+  --surface2: #f5f7fa;     /* input bg */
+  --panel:    #e8ecf2;     /* tag bg */
+  --accent:   #2563eb;     /* primary blue */
+  --accent2:  #4f46e5;     /* secondary indigo */
+  --accent3:  #059669;     /* green accent */
+  --green:    #059669;     /* same as accent3 */
+  --text:     #16202c;     /* main text - dark navy */
+  --muted:    #566172;     /* secondary text */
+  --faint:    rgba(37,99,235,0.07);   /* hover bg */
+  --border:   rgba(15,23,42,0.12);    /* borders */
+  --glow:     rgba(37,99,235,0.18);   /* glow effects */
+  --radius:   6px;
   --nav-h:    64px;
 }
 ```
-- Hardcoded dark values also updated to charcoal: nav/drawer/zoom-hint `rgba(34,38,45,*)`, lightbox `rgba(24,27,33,0.96)`, photo-frame gradient `#363f50 → #242931`
-- Accents (blue/green), red `#ef4444`, on-photo pill `rgba(8,11,17,0.82)` intentionally unchanged
+- Hardcoded values flipped to light: nav `rgba(255,255,255,0.85)`, drawer `rgba(255,255,255,0.97)`, zoom-hint `rgba(255,255,255,0.95)`, system-tag `rgba(255,255,255,0.75)`, photo-frame gradient `#f0f4f9 → #d8e0ea`, grid overlay `rgba(15,23,42,0.045)`, orbs `rgba(37,99,235,0.13)`/`rgba(99,102,241,0.12)`
+- Kept intentionally dark: lightbox `rgba(24,27,33,0.96)`, modal scrim `rgba(0,0,0,0.7)`; red `#ef4444` unchanged
+- `btn-primary`/`nav-hire` use `color:var(--bg)` on accent bg — works because --bg is now light
 
 ---
 
 ## Sections (in order)
-1. **Nav** — Fixed top bar with "ER." logo, nav links (About, Skills, Experience, Projects, Certs, Awards, Education, Contact), green "Hire Me" pill, mobile hamburger
-2. **Hero** — 3D photo card (mouse tilt, `#photoCard`) + `// System Profile` tag, "Hello, I'm Ebad-ur-Rehman Rajput", bio, 3 skill chips (with hover tilt), View My Work / Contact Me CTAs, animated glow orbs (`.hero-orb-a/b`)
-3. **About** (01) — Bio, contact info grid, circuit board SVG visual
+1. **Nav** — Fixed top bar with "ER." logo, nav links (About, Skills, Projects, Experience, Certs, Awards, Education, Contact), blue "Hire Me" pill, mobile hamburger
+2. **Hero** — Centered layout: circular 3D photo (`#photoCard`, white ring + glow) with "Open to Opportunities 2026" caption chip below, `// System Profile` tag, "Hello, I'm Ebad-ur-Rehman Rajput", bio, 3 skill chips, View My Work / Contact Me CTAs, animated glow orbs (`.hero-orb-a/b`)
+3. **About** (01) — Bio, info cards row (`auto-fit minmax(150px)`), circuit board SVG visual
 4. **Skills** (02) — 6 skill cards: Networking, Infrastructure, Cybersecurity, Databases, Programming, Office & Soft Skills
-5. **Experience** (03) — Timeline with 3 internships
-6. **Projects** (04) — 5 project cards + "+ Add Project" button with modal
+5. **Projects** (03) — 5 project cards + "+ Add Project" button with modal
+6. **Experience** (04) — Alternating center timeline (desktop ≥769px: odd items right-aligned left of line, even items right of line; mobile: left line), date chips, 3 internships newest-first: BIUT → DWP → Habib
 7. **Certifications** (05) — 3 verified cert cards (image + lightbox, issuer badge, date, Verify link, skills tags) + "+ Add Certification" dashed slot → modal (localStorage `customCerts`)
 8. **Achievements** (06) — 3 achievement cards
 9. **Education** (07) — 2 education cards (BS CS + HSSC)
 10. **Contact** (08) — Email, phone, location links
 11. **Footer** — Copyright line
+
+Every section header uses a **large outlined watermark number** (`.section-num`: absolutely positioned, `-webkit-text-stroke:1.5px rgba(37,99,235,0.22)`, `color:transparent`, behind the title; contact's is centered via `.contact-wrapper .section-num`).
 
 ---
 
@@ -84,14 +87,14 @@
 ---
 
 ## Internship Details
-1. **DWP Technologies** — ICT Network Engineer, March 2026, Karachi (Internship)
+1. **DWP Technologies** — ICT Network Engineer, July 2025 — August 2025, Karachi (Internship)
    - Configured/monitored enterprise routers and switches
    - Network troubleshooting (IP config, DNS resolution)
    - Security awareness training, firewall policy review
    - Data protection and access control systems
    - Logo: `images/dwp-logo.png`
 
-2. **BIUT** — System Specialist (Intern), June–Aug 2025, Nawabshah
+2. **BIUT** — System Specialist (Intern), June 2026 — July 2026, Nawabshah
    - Technical support for hardware/software/network
    - OS installation, configuration, maintenance
    - User accounts, access permissions, backups
@@ -150,7 +153,7 @@
 - **Add Project Modal:** "+ Add Project" button opens a form (name, badge, description, bullets, live/GitHub URLs), saves to localStorage, renders dynamic cards with delete buttons
 - **Add Certification Modal:** "+ Add Certification" slot/button opens form (name, issuer, skills, image upload). Image compressed via canvas → dataURL → localStorage `customCerts`. Esc closes modal.
 - **Cert Lightbox:** Clicking a cert image opens full-size view with caption; Esc closes.
-- **Hero Photo Tilt:** Mouse-move 3D tilt on `#photoCard` (perspective on `.photo-col`); skill chips have hover tilt.
+- **Hero Cursor Parallax:** Desktop (`pointer:fine`) — mousemove over `#hero` drives photo 3D tilt (±14°/±12°), name translate (±16px), chips counter-drift (±8px); resets on mouseleave. Entry `fadeUp ... forwards` animations are cleared via `animationend` (sets `animation:none; opacity:1`) so JS transforms are not blocked by fill-mode — same reason `.hello`/`.photo-card` had been frozen before.
 - **Scroll Reveal:** IntersectionObserver adds `.visible` class to `.reveal` elements for fade-in on scroll (`.reveal` starts visible as fallback — opacity:0 removed to fix blank page bug)
 - **Nav Active Link:** Highlights current section on scroll
 - **Skill Card Tilt:** 3D tilt effect on hover (desktop only, pointer:fine media query)
@@ -162,9 +165,10 @@
 - All CSS is inline in `<style>` tag (no external stylesheets)
 - Sections alternate between `var(--bg)` and `var(--surface)` backgrounds with border separators
 - `.reveal` class: transition-based scroll animation (opacity + transform), currently starts visible
-- Hero redesigned to match 3D reference portfolio: photo card with tilt, glow orbs, skill chips (all animations restored after `</style>` fix)
+- Hero: centered stack with circular photo (border-radius:50%, white ring, soft shadow), cursor parallax, glow orbs, skill chips (animations restored after `</style>` fix)
+- Cards use `var(--radius)` (6px), `var(--border)`, and dark-tinted hover shadows `rgba(15,23,42,0.10)` + accent glow
 - `body::before` (SVG noise texture) and `body::after` (grid pattern) pseudo-elements exist and work now that `</style>` is closed
-- Responsive breakpoints: 1024px (hide hero stats), 768px (mobile nav, single-column about, stack photo card), 520px (compact layout, full-width buttons), 480px (contact stack)
+- Responsive breakpoints: 1024px (hide hero stats), 960px (photo width/chips), 800px (single-column about), 769px (alternating timeline desktop), 768px (mobile nav), 520px (compact layout, full-width buttons), 480px (contact stack)
 
 ---
 
@@ -211,11 +215,11 @@ git push origin master
 ## File Structure
 ```
 C:\Users\Mehbob\Downloads\ebad-portfolio\   (clone of ibad2067/portfolio)
-  index.html          — Main portfolio file (all HTML/CSS/JS, ~1870 lines)
+  index.html          — Main portfolio file (all HTML/CSS/JS, ~1970 lines)
   AGENTS.md           — This context file
   .gitignore          — Ignores OS files, IDE files, .env, node_modules, .vercel
   images/
-    profile.jpg       — Hero profile photo (navy blazer headshot)
+    profile.jpg       — Hero profile photo (arms crossed, 800x800)
     dwp-logo.png      — DWP Technologies logo
     habib-logo.jpg    — Habib Sugar Mills logo
     biut-logo.svg     — BIUT logo
@@ -233,7 +237,7 @@ C:\Users\Mehbob\Downloads\ebad-portfolio\   (clone of ibad2067/portfolio)
 
 ## Source Assets (on disk, not in repo)
 - Cert/profile screenshots: `C:\Users\Mehbob\OneDrive\Pictures\Screenshots 1\`
-  - `Downloads\pfp new.jpg` — current profile photo (copied/compressed to `images/profile.jpg`)
+  - `Screenshot (245).png` — current profile photo source (1920x1080 dark canvas, white 429x429 card centered at x=744..1172/y=324..752; cropped + upscaled to 800x800 → `images/profile.jpg`)
   - Cert screenshots 243/244/246 → certificates (verified correct via Windows OCR: network-cloud/os-security/mern-stack)
   - `Screenshot (244).png` → OS & Security cert
   - `Screenshot (243).png` → Networking & Cloud cert
