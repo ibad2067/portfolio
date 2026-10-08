@@ -58,7 +58,7 @@
 
 ## Sections (in order)
 1. **Nav** — Fixed top bar with "ER." logo, nav links (About, Skills, Projects, Experience, Certs, Awards, Education, Contact), blue "Hire Me" pill, mobile hamburger
-2. **Hero** — Centered layout: circular 3D photo (`#photoCard`, white ring + glow) with "Open to Opportunities 2026" caption chip below, `// System Profile` tag, "Hello, I'm Ebad-ur-Rehman Rajput", bio, 3 skill chips, View My Work / Contact Me CTAs, animated glow orbs (`.hero-orb-a/b`)
+2. **Hero** — Two-column desktop: text column LEFT (`// System Profile` tag, "Hello, I'm Ebad-ur-Rehman Rajput", bio, 3 skill chips, CTAs — all flush-left) + circular 3D photo RIGHT (`#photoCard`, `justify-self:end`, hugs right edge) with "Open to Opportunities 2026" chip flush under it; animated glow orbs. Mobile ≤960px: stacked, photo on top (`order:-1`), everything centered.
 3. **About** (01) — Bio, info cards row (`auto-fit minmax(150px)`), circuit board SVG visual
 4. **Skills** (02) — 6 skill cards: Networking, Infrastructure, Cybersecurity, Databases, Programming, Office & Soft Skills
 5. **Projects** (03) — 5 project cards + "+ Add Project" button with modal
@@ -69,7 +69,7 @@
 10. **Contact** (08) — Email, phone, location links
 11. **Footer** — Copyright line
 
-Every section header uses a **large outlined watermark number** (`.section-num`: absolutely positioned, `-webkit-text-stroke:1.5px rgba(37,99,235,0.22)`, `color:transparent`, behind the title; contact's is centered via `.contact-wrapper .section-num`).
+Every section header uses a **large outlined watermark number** (`.section-num`: absolutely positioned `left:0` flush with title, `-webkit-text-stroke:2px rgba(30,26,20,0.8)` near-black, `color:transparent`, behind the title; contact's is centered via `.contact-wrapper .section-num`).
 
 ---
 
@@ -166,7 +166,7 @@ Every section header uses a **large outlined watermark number** (`.section-num`:
 - All CSS is inline in `<style>` tag (no external stylesheets)
 - Sections alternate between `var(--bg)` and `var(--surface)` backgrounds with border separators
 - `.reveal` class: scroll animation — starts `opacity:0; translateY(32px) scale(0.97)`, IntersectionObserver adds `.visible` → `scale(1)` (scale added for punchier entry motion)
-- Hero: centered stack with circular photo (border-radius:50%, white ring, soft shadow), cursor parallax, glow orbs, skill chips (animations restored after `</style>` fix)
+- Hero: two-column (text left, circular photo right at edge — border-radius:50%, white ring, soft shadow), cursor parallax, always-on photoFloat, glow orbs, skill chips
 - Cards use `var(--radius)` (6px), `var(--border)`, and warm-tinted hover shadows `rgba(70,55,25,0.10)` + accent glow
 - `body::before` (SVG noise texture) and `body::after` (grid pattern) pseudo-elements exist and work now that `</style>` is closed
 - Responsive breakpoints: 1024px (hide hero stats), 960px (photo width/chips), 800px (single-column about), 769px (alternating timeline desktop), 768px (mobile nav), 520px (compact layout, full-width buttons), 480px (contact stack)
