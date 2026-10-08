@@ -6,21 +6,21 @@
 <title>Ebad-ur-Rehman Rajput — Infrastructure & Network Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
-/* ── TOKENS – light theme ── */
+/* ── TOKENS – warm beige theme ── */
 :root {
-  --bg:       #eef1f5;
-  --surface:  #ffffff;
-  --surface2: #f5f7fa;
-  --panel:    #e8ecf2;
+  --bg:       #f3eee3;
+  --surface:  #fbf9f4;
+  --surface2: #f7f3ea;
+  --panel:    #ece5d6;
   --accent:   #2563eb;
   --accent2:  #4f46e5;
   --accent3:  #059669;
   --green:    #059669;
-  --text:     #16202c;
-  --muted:    #566172;
+  --text:     #26221a;
+  --muted:    #6f6757;
   --faint:    rgba(37,99,235,0.07);
-  --border:   rgba(15,23,42,0.12);
-  --glow:     rgba(37,99,235,0.18);
+  --border:   rgba(60,48,25,0.14);
+  --glow:     rgba(37,99,235,0.16);
   --radius:   6px;
   --nav-h:    64px;
 }
@@ -46,8 +46,8 @@ body::after {
   content:'';
   position:fixed; inset:0;
   background-image:
-    linear-gradient(rgba(15,23,42,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15,23,42,0.045) 1px, transparent 1px);
+    linear-gradient(rgba(90,70,35,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(90,70,35,0.05) 1px, transparent 1px);
   background-size:72px 72px;
   pointer-events:none; z-index:0;
 }
@@ -59,7 +59,7 @@ nav {
   padding:0 clamp(20px, 5vw, 60px);
   display:flex; align-items:center; justify-content:space-between;
   backdrop-filter:blur(24px);
-  background:rgba(255,255,255,0.85);
+  background:rgba(251,249,244,0.88);
   border-bottom:1px solid var(--border);
 }
 
@@ -118,7 +118,7 @@ nav {
   .nav-links {
     display:none; flex-direction:column; gap:0;
     position:fixed; top:var(--nav-h); left:0; right:0;
-    background:rgba(255,255,255,0.97);
+    background:rgba(251,249,244,0.98);
     border-bottom:1px solid var(--border);
     padding:12px 0;
   }
@@ -177,9 +177,10 @@ nav {
   background:var(--surface);
   box-shadow:
     0 0 0 1px var(--border),
-    0 24px 48px rgba(15,23,42,0.16),
+    0 24px 48px rgba(70,55,25,0.16),
     0 0 60px rgba(37,99,235,0.12);
   transform-style:preserve-3d;
+  perspective:1000px;
   transition:transform 0.2s ease-out;
   opacity:0; animation:fadeUp 0.7s 0.2s forwards;
 }
@@ -188,7 +189,8 @@ nav {
   border-radius:50%;
   overflow:hidden;
   aspect-ratio:1 / 1;
-  background:radial-gradient(circle at 30% 25%, #f0f4f9 0%, #d8e0ea 70%);
+  background:radial-gradient(circle at 30% 25%, #f5efe4 0%, #e2d8c6 70%);
+  animation:photoFloat 7s ease-in-out 1.4s infinite;
 }
 .photo-fallback {
   position:absolute; inset:0;
@@ -216,7 +218,7 @@ nav {
   border:1px solid var(--border);
   border-radius:999px;
   padding:9px 16px;
-  box-shadow:0 4px 14px rgba(15,23,42,0.06);
+  box-shadow:0 4px 14px rgba(70,55,25,0.08);
 }
 .photo-status .photo-year { margin-left:4px; color:var(--muted); }
 
@@ -226,7 +228,7 @@ nav {
   font-size:0.64rem; letter-spacing:0.26em; text-transform:uppercase;
   color:var(--accent);
   border:1px solid var(--border);
-  background:rgba(255,255,255,0.75);
+  background:rgba(255,253,248,0.78);
   padding:7px 16px; border-radius:999px;
   margin-bottom:22px;
   opacity:0; animation:fadeUp 0.7s 0.35s forwards;
@@ -314,6 +316,10 @@ nav {
 .btn-ghost:hover { background:var(--faint); border-color:var(--accent); transform:translateY(-2px); }
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes photoFloat {
+  0%,100% { transform:translateY(0) rotateY(-5deg) rotateX(2deg); }
+  50%     { transform:translateY(-10px) rotateY(5deg) rotateX(-2deg); }
+}
 
 @media(max-width:960px) {
   .photo-col { width:min(300px, 80vw); }
@@ -392,7 +398,7 @@ section {
   padding:16px 18px;
   border:1px solid var(--border);
   background:var(--surface2); border-radius:var(--radius);
-  box-shadow:0 1px 2px rgba(15,23,42,0.05);
+  box-shadow:0 1px 2px rgba(70,55,25,0.06);
   transition:border-color 0.25s, transform 0.25s;
 }
 .info-item:hover { border-color:var(--accent); transform:translateY(-3px); }
@@ -438,7 +444,7 @@ section {
 }
 .skill-card:hover {
   transform:translateY(-5px);
-  box-shadow:0 12px 32px rgba(15,23,42,0.10);
+  box-shadow:0 12px 32px rgba(70,55,25,0.10);
   border-color:var(--accent);
 }
 
@@ -528,7 +534,7 @@ section {
 .project-card:hover {
   border-color:var(--accent);
   transform:translateY(-3px);
-  box-shadow:0 14px 36px rgba(15,23,42,0.10), 0 0 40px rgba(37,99,235,0.10);
+  box-shadow:0 14px 36px rgba(70,55,25,0.10), 0 0 40px rgba(37,99,235,0.10);
 }
 .project-card::before {
   content:''; position:absolute; left:0; top:0; bottom:0;
@@ -584,7 +590,7 @@ section {
 .achievement-card:hover {
   transform:translateY(-4px);
   border-color:var(--accent3);
-  box-shadow:0 14px 34px rgba(15,23,42,0.10), 0 0 36px rgba(37,99,235,0.10);
+  box-shadow:0 14px 34px rgba(70,55,25,0.10), 0 0 36px rgba(37,99,235,0.10);
 }
 
 .achievement-num {
@@ -678,10 +684,10 @@ footer {
 
 /* ── REVEAL ── */
 .reveal {
-  opacity:0; transform:translateY(32px);
+  opacity:0; transform:translateY(32px) scale(0.97);
   transition:opacity 0.65s cubic-bezier(.23,1,.32,1), transform 0.65s cubic-bezier(.23,1,.32,1);
 }
-.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal.visible { opacity:1; transform:translateY(0) scale(1); }
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width:4px; }
@@ -807,7 +813,7 @@ a:focus-visible, button:focus-visible {
 .cert-card:hover {
   border-color:var(--accent);
   transform:translateY(-3px);
-  box-shadow:0 14px 36px rgba(15,23,42,0.10), 0 0 40px rgba(37,99,235,0.10);
+  box-shadow:0 14px 36px rgba(70,55,25,0.10), 0 0 40px rgba(37,99,235,0.10);
 }
 .cert-card .delete-btn {
   position:absolute; top:12px; right:12px;
@@ -840,7 +846,7 @@ a:focus-visible, button:focus-visible {
   position:absolute; right:10px; bottom:10px;
   font-family:'Space Mono', monospace;
   font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--accent); background:rgba(255,255,255,0.95);
+  color:var(--accent); background:rgba(255,253,248,0.96);
   border:1px solid var(--border); border-radius:2px;
   padding:4px 10px;
   opacity:0; transition:opacity 0.25s;
@@ -1664,8 +1670,8 @@ if (photoCard && window.matchMedia('(pointer:fine)').matches) {
     const r = hero.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width - 0.5;
     const y = (e.clientY - r.top) / r.height - 0.5;
-    photoCard.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 12}deg) translateZ(16px)`;
-    if (hello) hello.style.transform = `translate(${x * 16}px, ${y * 10}px)`;
+    photoCard.style.transform = `rotateY(${x * 16}deg) rotateX(${-y * 14}deg) translateZ(16px)`;
+    if (hello) hello.style.transform = `translate(${x * 18}px, ${y * 12}px)`;
     if (heroChips) heroChips.style.transform = `translate(${x * -8}px, ${y * -5}px)`;
   });
   hero.addEventListener('mouseleave', () => {
@@ -1677,7 +1683,7 @@ if (photoCard && window.matchMedia('(pointer:fine)').matches) {
 
 // ── Skill card tilt (desktop only) ──
 if (window.matchMedia('(pointer:fine)').matches) {
-  document.querySelectorAll('.skill-card, .project-card, .achievement-card').forEach(card => {
+  document.querySelectorAll('.skill-card, .project-card, .achievement-card, .cert-card, .edu-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;

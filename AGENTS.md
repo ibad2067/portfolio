@@ -30,29 +30,29 @@
 
 ---
 
-## Design Tokens (True Light Theme)
+## Design Tokens (Warm Beige Theme, blue accents kept)
 ```css
 :root {
-  --bg:       #eef1f5;     /* main background - light gray */
-  --surface:  #ffffff;     /* card/section bg */
-  --surface2: #f5f7fa;     /* input bg */
-  --panel:    #e8ecf2;     /* tag bg */
-  --accent:   #2563eb;     /* primary blue */
+  --bg:       #f3eee3;     /* main background - warm beige */
+  --surface:  #fbf9f4;     /* card/section bg - off-white */
+  --surface2: #f7f3ea;     /* input bg */
+  --panel:    #ece5d6;     /* tag bg */
+  --accent:   #2563eb;     /* primary blue (unchanged) */
   --accent2:  #4f46e5;     /* secondary indigo */
   --accent3:  #059669;     /* green accent */
   --green:    #059669;     /* same as accent3 */
-  --text:     #16202c;     /* main text - dark navy */
-  --muted:    #566172;     /* secondary text */
+  --text:     #26221a;     /* main text - warm near-black */
+  --muted:    #6f6757;     /* secondary text - warm gray */
   --faint:    rgba(37,99,235,0.07);   /* hover bg */
-  --border:   rgba(15,23,42,0.12);    /* borders */
-  --glow:     rgba(37,99,235,0.18);   /* glow effects */
+  --border:   rgba(60,48,25,0.14);    /* warm borders */
+  --glow:     rgba(37,99,235,0.16);   /* glow effects */
   --radius:   6px;
   --nav-h:    64px;
 }
 ```
-- Hardcoded values flipped to light: nav `rgba(255,255,255,0.85)`, drawer `rgba(255,255,255,0.97)`, zoom-hint `rgba(255,255,255,0.95)`, system-tag `rgba(255,255,255,0.75)`, photo-frame gradient `#f0f4f9 → #d8e0ea`, grid overlay `rgba(15,23,42,0.045)`, orbs `rgba(37,99,235,0.13)`/`rgba(99,102,241,0.12)`
-- Kept intentionally dark: lightbox `rgba(24,27,33,0.96)`, modal scrim `rgba(0,0,0,0.7)`; red `#ef4444` unchanged
-- `btn-primary`/`nav-hire` use `color:var(--bg)` on accent bg — works because --bg is now light
+- Hardcoded warm derivatives: nav `rgba(251,249,244,0.88)`, drawer `rgba(251,249,244,0.98)`, zoom-hint `rgba(255,253,248,0.96)`, system-tag `rgba(255,253,248,0.78)`, photo-frame gradient `#f5efe4 → #e2d8c6`, grid overlay `rgba(90,70,35,0.05)`, hover/entrance shadows `rgba(70,55,25,*)`, orbs `rgba(37,99,235,0.13)`/`rgba(99,102,241,0.12)` (blue glows kept deliberately)
+- Kept intentionally dark: lightbox `rgba(24,27,33,0.96)`, modal scrim `rgba(0,0,0,0.7)`; red `#ef4444` unchanged; watermark stroke stays `rgba(37,99,235,0.22)`
+- `btn-primary`/`nav-hire` use `color:var(--bg)` on accent bg — beige text on blue, contrast fine
 
 ---
 
@@ -153,10 +153,11 @@ Every section header uses a **large outlined watermark number** (`.section-num`:
 - **Add Project Modal:** "+ Add Project" button opens a form (name, badge, description, bullets, live/GitHub URLs), saves to localStorage, renders dynamic cards with delete buttons
 - **Add Certification Modal:** "+ Add Certification" slot/button opens form (name, issuer, skills, image upload). Image compressed via canvas → dataURL → localStorage `customCerts`. Esc closes modal.
 - **Cert Lightbox:** Clicking a cert image opens full-size view with caption; Esc closes.
-- **Hero Cursor Parallax:** Desktop (`pointer:fine`) — mousemove over `#hero` drives photo 3D tilt (±14°/±12°), name translate (±16px), chips counter-drift (±8px); resets on mouseleave. Entry `fadeUp ... forwards` animations are cleared via `animationend` (sets `animation:none; opacity:1`) so JS transforms are not blocked by fill-mode — same reason `.hello`/`.photo-card` had been frozen before.
+- **Hero Cursor Parallax:** Desktop (`pointer:fine`) — mousemove over `#hero` drives photo 3D tilt (±16°/±14°), name translate (±18px), chips counter-drift (±8px); resets on mouseleave. Entry `fadeUp ... forwards` animations are cleared via `animationend` (sets `animation:none; opacity:1`) so JS transforms are not blocked by fill-mode.
+- **Always-on Photo Float:** `.photo-frame` runs `photoFloat` keyframes (±5° rotateY, ±10px bob, 7s loop, delay 1.4s) — visible 3D motion on ALL devices, independent of mouse; `perspective:1000px` on `.photo-card`. JS tilt (card) and float (frame) are separate elements so they never conflict.
 - **Scroll Reveal:** IntersectionObserver adds `.visible` class to `.reveal` elements for fade-in on scroll (`.reveal` starts visible as fallback — opacity:0 removed to fix blank page bug)
 - **Nav Active Link:** Highlights current section on scroll
-- **Skill Card Tilt:** 3D tilt effect on hover (desktop only, pointer:fine media query)
+- **Skill Card Tilt:** 3D tilt effect on hover (desktop only, pointer:fine) — applies to `.skill-card, .project-card, .achievement-card, .cert-card, .edu-card`
 - **Mobile Nav:** Hamburger toggle with slide-down drawer
 
 ---
@@ -164,9 +165,9 @@ Every section header uses a **large outlined watermark number** (`.section-num`:
 ## CSS Architecture Notes
 - All CSS is inline in `<style>` tag (no external stylesheets)
 - Sections alternate between `var(--bg)` and `var(--surface)` backgrounds with border separators
-- `.reveal` class: transition-based scroll animation (opacity + transform), currently starts visible
+- `.reveal` class: scroll animation — starts `opacity:0; translateY(32px) scale(0.97)`, IntersectionObserver adds `.visible` → `scale(1)` (scale added for punchier entry motion)
 - Hero: centered stack with circular photo (border-radius:50%, white ring, soft shadow), cursor parallax, glow orbs, skill chips (animations restored after `</style>` fix)
-- Cards use `var(--radius)` (6px), `var(--border)`, and dark-tinted hover shadows `rgba(15,23,42,0.10)` + accent glow
+- Cards use `var(--radius)` (6px), `var(--border)`, and warm-tinted hover shadows `rgba(70,55,25,0.10)` + accent glow
 - `body::before` (SVG noise texture) and `body::after` (grid pattern) pseudo-elements exist and work now that `</style>` is closed
 - Responsive breakpoints: 1024px (hide hero stats), 960px (photo width/chips), 800px (single-column about), 769px (alternating timeline desktop), 768px (mobile nav), 520px (compact layout, full-width buttons), 480px (contact stack)
 
