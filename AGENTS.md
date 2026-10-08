@@ -51,25 +51,25 @@
 }
 ```
 - Hardcoded warm derivatives: nav `rgba(251,249,244,0.88)`, drawer `rgba(251,249,244,0.98)`, zoom-hint `rgba(255,253,248,0.96)`, system-tag `rgba(255,253,248,0.78)`, photo-frame gradient `#f5efe4 → #e2d8c6`, grid overlay `rgba(90,70,35,0.05)`, hover/entrance shadows `rgba(70,55,25,*)`, orbs `rgba(37,99,235,0.13)`/`rgba(99,102,241,0.12)` (blue glows kept deliberately)
-- Kept intentionally dark: lightbox `rgba(24,27,33,0.96)`, modal scrim `rgba(0,0,0,0.7)`; red `#ef4444` unchanged; watermark stroke stays `rgba(37,99,235,0.22)`
+- Kept intentionally dark: lightbox `rgba(24,27,33,0.96)`, modal scrim `rgba(0,0,0,0.7)`, hero photo-status overlay pill `rgba(8,11,17,0.82)`; red `#ef4444` unchanged
 - `btn-primary`/`nav-hire` use `color:var(--bg)` on accent bg — beige text on blue, contrast fine
 
 ---
 
 ## Sections (in order)
-1. **Nav** — Fixed top bar with "ER." logo, nav links (About, Skills, Projects, Experience, Certs, Awards, Education, Contact), blue "Hire Me" pill, mobile hamburger
-2. **Hero** — Two-column desktop: text column LEFT (`// System Profile` tag, "Hello, I'm Ebad-ur-Rehman Rajput", bio, 3 skill chips, CTAs — all flush-left) + circular 3D photo RIGHT (`#photoCard`, `justify-self:end`, hugs right edge) with "Open to Opportunities 2026" chip flush under it; animated glow orbs. Mobile ≤960px: stacked, photo on top (`order:-1`), everything centered.
-3. **About** (01) — Bio, info cards row (`auto-fit minmax(150px)`), circuit board SVG visual
+1. **Nav** — Fixed top bar with "ER." logo, nav links (About, Skills, Experience, Projects, Certs, Awards, Education, Contact), blue "Hire Me" pill, mobile hamburger
+2. **Hero** — Two-column desktop (`grid-template-columns:minmax(260px,380px) 1fr`): rectangular 3D photo card LEFT (`#photoCard`, radius 26px, white 3px border, aspect 4/4.5, dark "Open to Opportunities 2026" pill overlay inside the frame) + text RIGHT (`// System Profile` tag, "Hello, I'm Ebad-ur-Rehman Rajput", bio, 3 skill chips, CTAs); animated glow orbs, photoFloat bob. Mobile ≤960px: single column, photo first (top), everything centered.
+3. **About** (01) — Bio, info cards `1fr 1fr` grid, circuit board SVG visual
 4. **Skills** (02) — 6 skill cards: Networking, Infrastructure, Cybersecurity, Databases, Programming, Office & Soft Skills
-5. **Projects** (03) — 5 project cards + "+ Add Project" button with modal
-6. **Experience** (04) — Alternating center timeline (desktop ≥769px: odd items right-aligned left of line, even items right of line; mobile: left line), date chips, 3 internships newest-first: BIUT → DWP → Habib
+5. **Experience** (03) — Single-column left-rail timeline (no alternating), plain blue mono date text, 3 internships newest-first: BIUT → DWP → Habib
+6. **Projects** (04) — 5 project cards + "+ Add Project" button with modal
 7. **Certifications** (05) — 3 verified cert cards (image + lightbox, issuer badge, date, Verify link, skills tags) + "+ Add Certification" dashed slot → modal (localStorage `customCerts`)
 8. **Achievements** (06) — 3 achievement cards
 9. **Education** (07) — 2 education cards (BS CS + HSSC)
 10. **Contact** (08) — Email, phone, location links
 11. **Footer** — Copyright line
 
-Every section header uses a **large outlined watermark number** (`.section-num`: absolutely positioned `left:0` flush with title, `-webkit-text-stroke:2px rgba(30,26,20,0.8)` near-black, `color:transparent`, behind the title; contact's is centered via `.contact-wrapper .section-num`).
+Every section header uses a **small blue mono label** (`.section-num`: `font-size:0.62rem; letter-spacing:0.3em; color:var(--accent); text-transform:uppercase`, text like `01 — About`, sits above the title; direct flex children of `.section-header` except Projects/Certs which wrap num/title/line in a div to leave room for the +Add button; contact's label has inline `text-align:center`). Section titles (h2) stay `--text` dark; **card bodies and bullet points are solid `var(--text)`** — `--muted` is reserved for small mono labels (info-label, form labels, footer, cert dates).
 
 ---
 
@@ -166,10 +166,10 @@ Every section header uses a **large outlined watermark number** (`.section-num`:
 - All CSS is inline in `<style>` tag (no external stylesheets)
 - Sections alternate between `var(--bg)` and `var(--surface)` backgrounds with border separators
 - `.reveal` class: scroll animation — starts `opacity:0; translateY(32px) scale(0.97)`, IntersectionObserver adds `.visible` → `scale(1)` (scale added for punchier entry motion)
-- Hero: two-column (text left, circular photo right at edge — border-radius:50%, white ring, soft shadow), cursor parallax, always-on photoFloat, glow orbs, skill chips
+- Hero: two-column (rectangular photo card LEFT radius 26px + white border with dark status-pill overlay, text right), cursor parallax, always-on photoFloat, glow orbs, skill chips
 - Cards use `var(--radius)` (6px), `var(--border)`, and warm-tinted hover shadows `rgba(70,55,25,0.10)` + accent glow
 - `body::before` (SVG noise texture) and `body::after` (grid pattern) pseudo-elements exist and work now that `</style>` is closed
-- Responsive breakpoints: 1024px (hide hero stats), 960px (photo width/chips), 800px (single-column about), 769px (alternating timeline desktop), 768px (mobile nav), 520px (compact layout, full-width buttons), 480px (contact stack)
+- Responsive breakpoints: 1024px (hide hero stats), 960px (single-column hero, photo first), 800px (single-column about), 768px (mobile nav), 520px (compact layout, full-width buttons, hero orbs off), 480px (contact stack)
 
 ---
 

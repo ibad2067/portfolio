@@ -156,24 +156,22 @@ nav {
   50% { transform:translate(34px,-26px) scale(1.08); }
 }
 
-/* two-column hero grid: text left, photo right */
+/* two-column hero grid */
 .hero-grid {
   position:relative; z-index:2;
   display:grid;
-  grid-template-columns:1fr minmax(260px, 360px);
+  grid-template-columns:minmax(260px,380px) 1fr;
+  gap:clamp(36px, 6vw, 72px);
   align-items:center;
-  text-align:left;
-  gap:clamp(36px, 6vw, 80px);
   width:100%;
 }
 
-/* 3D photo circle */
-.photo-col { perspective:1100px; width:100%; max-width:360px; justify-self:end; }
+/* 3D photo card */
+.photo-col { perspective:1100px; }
 .photo-card {
   position:relative;
-  width:100%;
-  border-radius:50%;
-  border:6px solid var(--surface);
+  border-radius:26px;
+  border:3px solid rgba(255,255,255,0.88);
   background:var(--surface);
   box-shadow:
     0 0 0 1px var(--border),
@@ -186,9 +184,9 @@ nav {
 }
 .photo-frame {
   position:relative;
-  border-radius:50%;
+  border-radius:23px;
   overflow:hidden;
-  aspect-ratio:1 / 1;
+  aspect-ratio:4 / 4.5;
   background:radial-gradient(circle at 30% 25%, #f5efe4 0%, #e2d8c6 70%);
   animation:photoFloat 7s ease-in-out 1.4s infinite;
 }
@@ -206,21 +204,19 @@ nav {
   display:block;
 }
 .photo-status {
-  position:static; z-index:2;
+  position:absolute; z-index:2;
+  left:14px; right:14px; bottom:14px;
   display:flex; align-items:center; gap:8px;
-  justify-content:center;
-  width:max-content; max-width:100%;
-  margin:18px 0 0;
   font-family:'Space Mono', monospace;
   font-size:0.55rem; letter-spacing:0.14em; text-transform:uppercase;
-  color:var(--accent);
-  background:var(--surface);
-  border:1px solid var(--border);
+  color:#fff;
+  background:rgba(8,11,17,0.82);
+  border:1px solid rgba(255,255,255,0.14);
   border-radius:999px;
   padding:9px 16px;
-  box-shadow:0 4px 14px rgba(70,55,25,0.08);
+  backdrop-filter:blur(10px);
 }
-.photo-status .photo-year { margin-left:4px; color:var(--muted); }
+.photo-status .photo-year { margin-left:auto; color:rgba(255,255,255,0.7); }
 
 .system-tag {
   display:inline-flex; align-items:center; gap:9px;
@@ -253,15 +249,14 @@ nav {
 .hero-bio {
   font-size:clamp(0.85rem, 1.4vw, 1rem);
   line-height:1.85;
-  color:var(--muted);
-  max-width:560px; margin:0 0 32px;
+  color:var(--text);
+  max-width:560px; margin-bottom:32px;
   opacity:0; animation:fadeUp 0.7s 0.55s forwards;
 }
 
 /* skill chips (reference design) */
 .hero-chips {
   display:flex; gap:12px; flex-wrap:wrap;
-  justify-content:flex-start;
   margin-bottom:36px;
   transition:transform 0.3s ease-out;
   opacity:0; animation:fadeUp 0.7s 0.65s forwards;
@@ -283,12 +278,11 @@ nav {
 .chip-sub {
   font-family:'Space Mono', monospace;
   font-size:0.56rem; letter-spacing:0.14em; text-transform:uppercase;
-  color:var(--muted);
+  color:var(--text);
 }
 
 .hero-cta {
   display:flex; gap:14px; flex-wrap:wrap;
-  justify-content:flex-start;
   opacity:0; animation:fadeUp 0.7s 0.8s forwards;
 }
 
@@ -323,11 +317,11 @@ nav {
 
 @media(max-width:960px) {
   .hero-grid { grid-template-columns:1fr; justify-items:center; text-align:center; }
-  .photo-col { order:-1; width:min(300px, 80vw); margin:0 auto; }
+  .photo-col { width:min(320px, 82vw); }
   .hero-bio { margin-left:auto; margin-right:auto; }
-  .hero-chips, .hero-cta { justify-content:center; }
-  .photo-status { margin:18px auto 0; }
-  .chip { min-width:0; flex:1 1 140px; }
+  .hero-chips { justify-content:center; }
+  .hero-cta { justify-content:center; }
+  .system-tag { margin-left:auto; margin-right:auto; }
 }
 @media(max-width:520px) {
   .hero-orb { display:none; }
@@ -341,38 +335,22 @@ section {
   position:relative; z-index:2;
 }
 
-.section-header {
-  position:relative;
-  margin-bottom:clamp(48px, 6vw, 72px);
-  padding-top:clamp(24px, 4vw, 40px);
-}
+.section-header { margin-bottom:clamp(32px, 5vw, 56px); }
 
 .section-num {
-  position:absolute; top:-14px; left:0; z-index:0;
-  font-family:'Space Grotesk', sans-serif;
-  font-weight:700;
-  font-size:clamp(4.2rem, 9vw, 6.8rem);
-  line-height:1; letter-spacing:-0.04em;
-  color:transparent;
-  -webkit-text-stroke:2px rgba(30,26,20,0.8);
-  margin-bottom:0;
-  pointer-events:none; user-select:none;
+  font-family:'Space Mono', monospace;
+  font-size:0.62rem; letter-spacing:0.3em;
+  color:var(--accent); text-transform:uppercase; margin-bottom:12px;
 }
 
 .section-title {
-  position:relative; z-index:1;
   font-weight:700; font-size:clamp(1.5rem, 4vw, 2.8rem); line-height:1.1;
 }
 
 .section-line {
-  position:relative; z-index:1;
   width:52px; height:2px;
   background:linear-gradient(90deg, var(--accent), transparent);
   margin-top:18px;
-}
-
-.contact-wrapper .section-num {
-  left:50%; transform:translateX(-50%);
 }
 
 /* ── ABOUT ── */
@@ -390,22 +368,19 @@ section {
 
 .about-text p {
   font-size:0.875rem; line-height:1.9;
-  color:var(--text); opacity:0.78; margin-bottom:18px;
+  color:var(--text); margin-bottom:18px;
 }
 
 .about-info {
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  display:grid; grid-template-columns:1fr 1fr;
   gap:12px; margin-top:28px;
 }
 
 .info-item {
-  padding:16px 18px;
+  padding:14px 16px;
   border:1px solid var(--border);
   background:var(--surface2); border-radius:var(--radius);
-  box-shadow:0 1px 2px rgba(70,55,25,0.06);
-  transition:border-color 0.25s, transform 0.25s;
 }
-.info-item:hover { border-color:var(--accent); transform:translateY(-3px); }
 .info-label {
   font-family:'Space Mono', monospace;
   font-size:0.58rem; color:var(--muted);
@@ -460,7 +435,7 @@ section {
 .skill-tag {
   font-family:'Space Mono', monospace;
   font-size:0.6rem; padding:3px 9px;
-  background:var(--panel); color:var(--muted);
+  background:var(--panel); color:var(--text);
   border:1px solid var(--border); border-radius:2px;
   letter-spacing:0.06em;
   transition:color 0.25s, border-color 0.25s;
@@ -487,39 +462,23 @@ section {
 }
 
 .timeline-date {
-  display:inline-block;
   font-family:'Space Mono', monospace;
-  font-size:0.6rem; color:var(--accent);
-  letter-spacing:0.18em; text-transform:uppercase;
-  background:var(--faint); border:1px solid var(--border);
-  padding:5px 13px; border-radius:999px; margin-bottom:12px;
+  font-size:0.62rem; color:var(--accent);
+  letter-spacing:0.2em; text-transform:uppercase; margin-bottom:6px;
 }
 .timeline-role {
   font-weight:700; font-size:1.2rem; margin-bottom:3px;
 }
 .timeline-company {
-  font-size:0.78rem; color:var(--muted); margin-bottom:18px;
+  font-size:0.78rem; color:var(--text); margin-bottom:18px;
 }
 .timeline-list { list-style:none; }
 .timeline-list li {
   font-size:0.82rem; line-height:1.8;
-  color:var(--text); opacity:0.72;
+  color:var(--text);
   padding-left:18px; margin-bottom:8px; position:relative;
 }
 .timeline-list li::before { content:'›'; position:absolute; left:0; color:var(--accent); }
-
-@media(min-width:769px) {
-  .timeline { padding-left:0; max-width:960px; margin-left:auto; margin-right:auto; }
-  .timeline::before { left:50%; }
-  .timeline-item { width:calc(50% - 40px); margin-bottom:56px; }
-  .timeline-item:nth-child(odd) { margin-right:auto; text-align:right; }
-  .timeline-item:nth-child(even) { margin-left:auto; text-align:left; }
-  .timeline-item::before { top:8px; left:calc(100% + 36px); }
-  .timeline-item:nth-child(even)::before { left:-44px; }
-  .timeline-item:nth-child(odd) .timeline-company { justify-content:flex-end; }
-  .timeline-item:nth-child(odd) .timeline-list li { padding-left:0; padding-right:18px; }
-  .timeline-item:nth-child(odd) .timeline-list li::before { content:'‹'; left:auto; right:0; }
-}
 
 @media(max-width:520px) {
   .timeline-item { margin-bottom:36px; }
@@ -560,12 +519,12 @@ section {
 }
 .project-desc {
   font-size:0.84rem; line-height:1.8;
-  color:var(--text); opacity:0.78; margin-bottom:22px;
+  color:var(--text); margin-bottom:22px;
 }
 .project-points { list-style:none; }
 .project-points li {
   font-size:0.8rem; line-height:1.8;
-  color:var(--text); opacity:0.7;
+  color:var(--text);
   padding-left:22px; position:relative; margin-bottom:8px;
 }
 .project-points li::before {
@@ -605,7 +564,7 @@ section {
 }
 .achievement-card:hover .achievement-num { color:var(--accent); }
 .achievement-title { font-weight:700; font-size:0.92rem; margin-bottom:8px; }
-.achievement-desc { font-size:0.76rem; color:var(--muted); line-height:1.7; }
+.achievement-desc { font-size:0.76rem; color:var(--text); line-height:1.7; }
 
 /* ── EDUCATION ── */
 .edu-card {
@@ -629,8 +588,8 @@ section {
   text-transform:uppercase; margin-bottom:7px;
 }
 .edu-degree { font-weight:700; font-size:1.15rem; margin-bottom:3px; }
-.edu-school { font-size:0.78rem; color:var(--muted); margin-bottom:10px; }
-.edu-detail { font-size:0.76rem; color:var(--text); opacity:0.6; line-height:1.7; }
+.edu-school { font-size:0.78rem; color:var(--text); margin-bottom:10px; }
+.edu-detail { font-size:0.76rem; color:var(--text); line-height:1.7; }
 .edu-grade {
   display:inline-block; margin-top:12px;
   padding:4px 14px; border:1px solid rgba(52,211,153,0.35);
@@ -643,7 +602,7 @@ section {
 #contact { text-align:center; }
 .contact-wrapper { max-width:560px; margin:0 auto; }
 .contact-desc {
-  font-size:0.85rem; color:var(--muted); line-height:1.8; margin-top:22px;
+  font-size:0.85rem; color:var(--text); line-height:1.8; margin-top:22px;
 }
 .contact-links {
   display:flex; justify-content:center; gap:14px;
@@ -907,7 +866,7 @@ a:focus-visible, button:focus-visible {
 .cert-skills li {
   font-family:'Space Mono', monospace;
   font-size:0.6rem; padding:3px 10px;
-  background:var(--panel); color:var(--muted);
+  background:var(--panel); color:var(--text);
   border:1px solid var(--border); border-radius:2px;
   letter-spacing:0.06em;
   transition:color 0.25s, border-color 0.25s;
@@ -944,7 +903,7 @@ a:focus-visible, button:focus-visible {
   color:var(--muted);
 }
 .add-cert-hint {
-  font-size:0.72rem; color:var(--muted); opacity:0.7;
+  font-size:0.72rem; color:var(--text);
   max-width:250px; text-align:center; line-height:1.6;
   padding:0 16px;
 }
@@ -1028,8 +987,8 @@ a:focus-visible, button:focus-visible {
   <div class="nav-links" id="navLinks">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
     <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
     <a href="#certifications">Certs</a>
     <a href="#achievements">Awards</a>
     <a href="#education">Education</a>
@@ -1044,7 +1003,22 @@ a:focus-visible, button:focus-visible {
   <div class="hero-orb hero-orb-b"></div>
   <div class="hero-grid">
 
-    <!-- Intro + chips + CTAs -->
+    <!-- Left: 3D profile photo card -->
+    <div class="photo-col">
+      <div class="photo-card" id="photoCard">
+        <div class="photo-frame">
+          <div class="photo-fallback">ER</div>
+          <img src="images/profile.jpg" alt="Ebad-ur-Rehman Rajput" onerror="this.style.display='none'">
+          <div class="photo-status">
+            <span class="status-dot"></span>
+            <span>Open to Opportunities</span>
+            <span class="photo-year">2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: intro + chips + CTAs -->
     <div class="hero-text">
       <div class="system-tag"><span class="status-dot"></span>// System Profile</div>
       <h1 class="hello">Hello, I'm<br><span class="accent">Ebad-ur-Rehman Rajput</span></h1>
@@ -1071,32 +1045,15 @@ a:focus-visible, button:focus-visible {
       </div>
     </div>
 
-    <!-- Profile photo (right side) -->
-    <div class="photo-col">
-      <div class="photo-card" id="photoCard">
-        <div class="photo-frame">
-          <div class="photo-fallback">ER</div>
-          <img src="images/profile.jpg" alt="Ebad-ur-Rehman Rajput" onerror="this.style.display='none'">
-        </div>
-      </div>
-      <div class="photo-status">
-        <span class="status-dot"></span>
-        <span>Open to Opportunities</span>
-        <span class="photo-year">2026</span>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="section-header reveal">
-    <div>
-      <div class="section-num">01</div>
-      <h2 class="section-title">Who I Am</h2>
-      <div class="section-line"></div>
-    </div>
+    <div class="section-num">01 — About</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="section-line"></div>
   </div>
   <div class="about-grid">
     <div class="about-text reveal">
@@ -1163,11 +1120,9 @@ a:focus-visible, button:focus-visible {
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-header reveal">
-    <div>
-      <div class="section-num">02</div>
-      <h2 class="section-title">Technical Arsenal</h2>
-      <div class="section-line"></div>
-    </div>
+    <div class="section-num">02 — Skills</div>
+    <h2 class="section-title">Technical Arsenal</h2>
+    <div class="section-line"></div>
   </div>
   <div class="skills-grid">
     <div class="skill-card reveal">
@@ -1237,11 +1192,64 @@ a:focus-visible, button:focus-visible {
   </div>
 </section>
 
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div class="section-num">03 — Experience</div>
+    <h2 class="section-title">Work History</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date">June 2026 — July 2026</div>
+      <div class="timeline-role">System Specialist (Intern)</div>
+      <div class="timeline-company">
+        <img src="images/biut-logo.svg" alt="BIUT" class="company-logo" onerror="this.style.display='none'">
+        BIUT — Nawabshah, Pakistan
+      </div>
+      <ul class="timeline-list">
+        <li>Provided technical support and troubleshooting for hardware, software, and network issues</li>
+        <li>Assisted in system administration tasks including OS installation, configuration, and maintenance</li>
+        <li>Managed user accounts, access permissions, and system backups</li>
+        <li>Collaborated with the IT team to maintain infrastructure reliability and document procedures</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">July 2025 — August 2025</div>
+      <div class="timeline-role">ICT Network Engineer</div>
+      <div class="timeline-company">
+        <img src="images/dwp-logo.png" alt="DWP Technologies" class="company-logo" onerror="this.style.display='none'">
+        DWP Technologies — Karachi, Pakistan (Internship)
+      </div>
+      <ul class="timeline-list">
+        <li>Configured and monitored network devices including enterprise routers and switches</li>
+        <li>Applied network troubleshooting techniques — IP configuration and DNS resolution</li>
+        <li>Participated in security awareness training and assisted in reviewing firewall policies</li>
+        <li>Gained practical knowledge of data protection mechanisms and access control systems</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">June 2024 — July 2024</div>
+      <div class="timeline-role">Network Engineer</div>
+      <div class="timeline-company">
+        <img src="images/habib-logo.jpg" alt="Habib Sugar Mills" class="company-logo" onerror="this.style.display='none'">
+        Habib Sugar Mills Limited — Nawabshah, Pakistan (Internship)
+      </div>
+      <ul class="timeline-list">
+        <li>Managed admin-side operations and industry network infrastructure</li>
+        <li>Provided network support across production and distillery divisions</li>
+        <li>Assisted in configuring and maintaining network connectivity for industrial systems</li>
+        <li>Gained hands-on experience in enterprise-level network administration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-header reveal">
     <div>
-      <div class="section-num">03</div>
+      <div class="section-num">04 — Projects</div>
       <h2 class="section-title">Key Work</h2>
       <div class="section-line"></div>
     </div>
@@ -1306,66 +1314,11 @@ a:focus-visible, button:focus-visible {
   </div>
 </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-num">04</div>
-      <h2 class="section-title">Work History</h2>
-      <div class="section-line"></div>
-    </div>
-  </div>
-  <div class="timeline">
-    <div class="timeline-item reveal">
-      <div class="timeline-date">June 2026 — July 2026</div>
-      <div class="timeline-role">System Specialist (Intern)</div>
-      <div class="timeline-company">
-        <img src="images/biut-logo.svg" alt="BIUT" class="company-logo" onerror="this.style.display='none'">
-        BIUT — Nawabshah, Pakistan
-      </div>
-      <ul class="timeline-list">
-        <li>Provided technical support and troubleshooting for hardware, software, and network issues</li>
-        <li>Assisted in system administration tasks including OS installation, configuration, and maintenance</li>
-        <li>Managed user accounts, access permissions, and system backups</li>
-        <li>Collaborated with the IT team to maintain infrastructure reliability and document procedures</li>
-      </ul>
-    </div>
-    <div class="timeline-item reveal">
-      <div class="timeline-date">July 2025 — August 2025</div>
-      <div class="timeline-role">ICT Network Engineer</div>
-      <div class="timeline-company">
-        <img src="images/dwp-logo.png" alt="DWP Technologies" class="company-logo" onerror="this.style.display='none'">
-        DWP Technologies — Karachi, Pakistan (Internship)
-      </div>
-      <ul class="timeline-list">
-        <li>Configured and monitored network devices including enterprise routers and switches</li>
-        <li>Applied network troubleshooting techniques — IP configuration and DNS resolution</li>
-        <li>Participated in security awareness training and assisted in reviewing firewall policies</li>
-        <li>Gained practical knowledge of data protection mechanisms and access control systems</li>
-      </ul>
-    </div>
-    <div class="timeline-item reveal">
-      <div class="timeline-date">June 2024 — July 2024</div>
-      <div class="timeline-role">Network Engineer</div>
-      <div class="timeline-company">
-        <img src="images/habib-logo.jpg" alt="Habib Sugar Mills" class="company-logo" onerror="this.style.display='none'">
-        Habib Sugar Mills Limited — Nawabshah, Pakistan (Internship)
-      </div>
-      <ul class="timeline-list">
-        <li>Managed admin-side operations and industry network infrastructure</li>
-        <li>Provided network support across production and distillery divisions</li>
-        <li>Assisted in configuring and maintaining network connectivity for industrial systems</li>
-        <li>Gained hands-on experience in enterprise-level network administration</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
 <!-- CERTIFICATIONS -->
 <section id="certifications">
   <div class="section-header reveal">
     <div>
-      <div class="section-num">05</div>
+      <div class="section-num">05 — Certifications</div>
       <h2 class="section-title">Verified Credentials</h2>
       <div class="section-line"></div>
     </div>
@@ -1467,11 +1420,9 @@ a:focus-visible, button:focus-visible {
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
   <div class="section-header reveal">
-    <div>
-      <div class="section-num">06</div>
-      <h2 class="section-title">Recognition</h2>
-      <div class="section-line"></div>
-    </div>
+    <div class="section-num">06 — Achievements</div>
+    <h2 class="section-title">Recognition</h2>
+    <div class="section-line"></div>
   </div>
   <div class="achievements-grid">
     <div class="achievement-card reveal">
@@ -1495,11 +1446,9 @@ a:focus-visible, button:focus-visible {
 <!-- EDUCATION -->
 <section id="education">
   <div class="section-header reveal">
-    <div>
-      <div class="section-num">07</div>
-      <h2 class="section-title">Academic Background</h2>
-      <div class="section-line"></div>
-    </div>
+    <div class="section-num">07 — Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="section-line"></div>
   </div>
   <div class="edu-card reveal">
     <div class="edu-period">2022 — 2026</div>
@@ -1520,7 +1469,7 @@ a:focus-visible, button:focus-visible {
 <section id="contact">
   <div class="contact-wrapper">
     <div class="section-header reveal" style="text-align:center">
-      <div class="section-num">08</div>
+      <div class="section-num" style="text-align:center">08 — Contact</div>
       <h2 class="section-title">Let's Connect</h2>
       <div class="section-line" style="margin:18px auto 0"></div>
     </div>
