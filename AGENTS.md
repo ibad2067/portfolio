@@ -18,7 +18,7 @@
 ---
 
 ## Technical Structure
-- **Single-file architecture:** `index.html` (~1970 lines) — all HTML, CSS (inline `<style>`), and JS (inline `<script>`) in one file
+- **Single-file architecture:** `index.html` (~1540 lines) — all HTML, CSS (inline `<style>`), and JS (inline `<script>`) in one file
 - **Fonts:** Space Grotesk (headings/body) + Space Mono (monospace/labels) via Google Fonts CDN
 - **Images:** `images/` directory with profile photo, company logos, project screenshots, and certificates
   - `profile.jpg` — Hero photo (arms crossed, green circle background, 800x800, source `Screenshot (245).png` white-card crop)
@@ -30,29 +30,29 @@
 
 ---
 
-## Design Tokens (Warm Beige Theme, blue accents kept)
+## Design Tokens (Dark Warm Brown Theme, blue accents)
 ```css
 :root {
-  --bg:       #f3eee3;     /* main background - warm beige */
-  --surface:  #fbf9f4;     /* card/section bg - off-white */
-  --surface2: #f7f3ea;     /* input bg */
-  --panel:    #ece5d6;     /* tag bg */
-  --accent:   #2563eb;     /* primary blue (unchanged) */
-  --accent2:  #4f46e5;     /* secondary indigo */
-  --accent3:  #059669;     /* green accent */
-  --green:    #059669;     /* same as accent3 */
-  --text:     #26221a;     /* main text - warm near-black */
-  --muted:    #6f6757;     /* secondary text - warm gray */
-  --faint:    rgba(37,99,235,0.07);   /* hover bg */
-  --border:   rgba(60,48,25,0.14);    /* warm borders */
-  --glow:     rgba(37,99,235,0.16);   /* glow effects */
+  --bg:       #17130f;     /* main background - espresso near-black */
+  --surface:  #201a13;     /* card/section bg - dark brown */
+  --surface2: #262017;     /* input bg */
+  --panel:    #2e2719;     /* tag bg - warm olive brown */
+  --accent:   #60a5fa;     /* sky blue (readable on dark) */
+  --accent2:  #818cf8;     /* secondary indigo */
+  --accent3:  #34d399;     /* green accent */
+  --green:    #34d399;     /* same as accent3 */
+  --text:     #ece5d8;     /* main text - warm cream */
+  --muted:    #a89a85;     /* secondary text - warm tan-gray */
+  --faint:    rgba(96,165,250,0.08);   /* hover bg */
+  --border:   rgba(226,197,150,0.14);  /* warm tan hairlines */
+  --glow:     rgba(96,165,250,0.2);    /* glow effects */
   --radius:   6px;
   --nav-h:    64px;
 }
 ```
-- Hardcoded warm derivatives: nav `rgba(251,249,244,0.88)`, drawer `rgba(251,249,244,0.98)`, zoom-hint `rgba(255,253,248,0.96)`, system-tag `rgba(255,253,248,0.78)`, photo-frame gradient `#f5efe4 → #e2d8c6`, grid overlay `rgba(90,70,35,0.05)`, hover/entrance shadows `rgba(70,55,25,*)`, orbs `rgba(37,99,235,0.13)`/`rgba(99,102,241,0.12)` (blue glows kept deliberately)
-- Kept intentionally dark: lightbox `rgba(24,27,33,0.96)`, modal scrim `rgba(0,0,0,0.7)`, hero photo-status overlay pill `rgba(8,11,17,0.82)`; red `#ef4444` unchanged
-- `btn-primary`/`nav-hire` use `color:var(--bg)` on accent bg — beige text on blue, contrast fine
+- Hardcoded dark derivatives: nav `rgba(23,19,15,0.9)`, drawer `rgba(23,19,15,0.98)`, zoom-hint `rgba(15,20,25,0.9)`, system-tag `rgba(40,34,25,0.8)`, photo-frame gradient `#2e261a → #17120c`, grid overlay `rgba(226,197,150,0.05)`, card shadows `rgba(0,0,0,0.4/0.55)` + sky-blue glow `rgba(96,165,250,*)`, orbs `rgba(96,165,250,0.15)`/`rgba(129,140,248,0.13)`
+- Kept intentionally dark: lightbox `rgba(24,27,33,0.96)`, hero photo-status overlay pill `rgba(8,11,17,0.82)` + white pill text, photo-card white border
+- `btn-primary`/`nav-hire` use `color:var(--bg)` on accent bg — cream text on sky blue, contrast fine
 
 ---
 
@@ -62,14 +62,14 @@
 3. **About** (01) — Bio, info cards `1fr 1fr` grid, circuit board SVG visual
 4. **Skills** (02) — 6 skill cards: Networking, Infrastructure, Cybersecurity, Databases, Programming, Office & Soft Skills
 5. **Experience** (03) — Single-column left-rail timeline (no alternating), plain blue mono date text, 3 internships newest-first: BIUT → DWP → Habib
-6. **Projects** (04) — 5 project cards + "+ Add Project" button with modal
-7. **Certifications** (05) — 3 verified cert cards (image + lightbox, issuer badge, date, Verify link, skills tags) + "+ Add Certification" dashed slot → modal (localStorage `customCerts`)
+6. **Projects** (04) — 5 static project cards (no add/edit UI — content edited in code only)
+7. **Certifications** (05) — 3 static verified cert cards (image + lightbox, issuer badge, date, Verify link, skills tags) — no add slot/modal/localStorage
 8. **Achievements** (06) — 3 achievement cards
 9. **Education** (07) — 2 education cards (BS CS + HSSC)
 10. **Contact** (08) — Email, phone, location links
 11. **Footer** — Copyright line
 
-Every section header uses a **small blue mono label** (`.section-num`: `font-size:0.62rem; letter-spacing:0.3em; color:var(--accent); text-transform:uppercase`, text like `01 — About`, sits above the title; direct flex children of `.section-header` except Projects/Certs which wrap num/title/line in a div to leave room for the +Add button; contact's label has inline `text-align:center`). Section titles (h2) stay `--text` dark; **card bodies and bullet points are solid `var(--text)`** — `--muted` is reserved for small mono labels (info-label, form labels, footer, cert dates).
+Every section header uses a **small blue mono label** (`.section-num`: `font-size:0.62rem; letter-spacing:0.3em; color:var(--accent); text-transform:uppercase`, text like `01 — About`, sits above the title; num/title/line are direct flex children of `.section-header` in ALL sections (row layout, `justify-content:space-between`); contact's label has inline `text-align:center`). Section titles (h2) stay `--text` cream; **card bodies and bullet points are solid `var(--text)`** — `--muted` is reserved for small mono labels (info-label, form labels, footer, cert dates).
 
 ---
 
@@ -150,9 +150,7 @@ Every section header uses a **small blue mono label** (`.section-num`: `font-siz
 ---
 
 ## Interactive Features
-- **Add Project Modal:** "+ Add Project" button opens a form (name, badge, description, bullets, live/GitHub URLs), saves to localStorage, renders dynamic cards with delete buttons
-- **Add Certification Modal:** "+ Add Certification" slot/button opens form (name, issuer, skills, image upload). Image compressed via canvas → dataURL → localStorage `customCerts`. Esc closes modal.
-- **Cert Lightbox:** Clicking a cert image opens full-size view with caption; Esc closes.
+- **Cert Lightbox:** Clicking a cert image opens full-size view with caption; Esc closes. (Add Project/Add Certification modals + localStorage were REMOVED — all content edits happen in code, never live in the browser)
 - **Hero Cursor Parallax:** Desktop (`pointer:fine`) — mousemove over `#hero` drives photo 3D tilt (±16°/±14°), name translate (±18px), chips counter-drift (±8px); resets on mouseleave. Entry `fadeUp ... forwards` animations are cleared via `animationend` (sets `animation:none; opacity:1`) so JS transforms are not blocked by fill-mode.
 - **Always-on Photo Float:** `.photo-frame` runs `photoFloat` keyframes (±5° rotateY, ±10px bob, 7s loop, delay 1.4s) — visible 3D motion on ALL devices, independent of mouse; `perspective:1000px` on `.photo-card`. JS tilt (card) and float (frame) are separate elements so they never conflict.
 - **Scroll Reveal:** IntersectionObserver adds `.visible` class to `.reveal` elements for fade-in on scroll (`.reveal` starts visible as fallback — opacity:0 removed to fix blank page bug)
@@ -167,7 +165,7 @@ Every section header uses a **small blue mono label** (`.section-num`: `font-siz
 - Sections alternate between `var(--bg)` and `var(--surface)` backgrounds with border separators
 - `.reveal` class: scroll animation — starts `opacity:0; translateY(32px) scale(0.97)`, IntersectionObserver adds `.visible` → `scale(1)` (scale added for punchier entry motion)
 - Hero: two-column (rectangular photo card LEFT radius 26px + white border with dark status-pill overlay, text right), cursor parallax, always-on photoFloat, glow orbs, skill chips
-- Cards use `var(--radius)` (6px), `var(--border)`, and warm-tinted hover shadows `rgba(70,55,25,0.10)` + accent glow
+- Cards use `var(--radius)` (6px), `var(--border)`, and dark hover shadows `rgba(0,0,0,0.4)` + sky-blue glow `rgba(96,165,250,0.1)`
 - `body::before` (SVG noise texture) and `body::after` (grid pattern) pseudo-elements exist and work now that `</style>` is closed
 - Responsive breakpoints: 1024px (hide hero stats), 960px (single-column hero, photo first), 800px (single-column about), 768px (mobile nav), 520px (compact layout, full-width buttons, hero orbs off), 480px (contact stack)
 
@@ -216,7 +214,7 @@ git push origin master
 ## File Structure
 ```
 C:\Users\Mehbob\Downloads\ebad-portfolio\   (clone of ibad2067/portfolio)
-  index.html          — Main portfolio file (all HTML/CSS/JS, ~1970 lines)
+  index.html          — Main portfolio file (all HTML/CSS/JS, ~1540 lines)
   AGENTS.md           — This context file
   .gitignore          — Ignores OS files, IDE files, .env, node_modules, .vercel
   images/

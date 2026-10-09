@@ -6,21 +6,21 @@
 <title>Ebad-ur-Rehman Rajput — Infrastructure & Network Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
-/* ── TOKENS – warm beige theme ── */
+/* ── TOKENS – dark warm brown theme ── */
 :root {
-  --bg:       #f3eee3;
-  --surface:  #fbf9f4;
-  --surface2: #f7f3ea;
-  --panel:    #ece5d6;
-  --accent:   #2563eb;
-  --accent2:  #4f46e5;
-  --accent3:  #059669;
-  --green:    #059669;
-  --text:     #26221a;
-  --muted:    #6f6757;
-  --faint:    rgba(37,99,235,0.07);
-  --border:   rgba(60,48,25,0.14);
-  --glow:     rgba(37,99,235,0.16);
+  --bg:       #17130f;
+  --surface:  #201a13;
+  --surface2: #262017;
+  --panel:    #2e2719;
+  --accent:   #60a5fa;
+  --accent2:  #818cf8;
+  --accent3:  #34d399;
+  --green:    #34d399;
+  --text:     #ece5d8;
+  --muted:    #a89a85;
+  --faint:    rgba(96,165,250,0.08);
+  --border:   rgba(226,197,150,0.14);
+  --glow:     rgba(96,165,250,0.2);
   --radius:   6px;
   --nav-h:    64px;
 }
@@ -46,8 +46,8 @@ body::after {
   content:'';
   position:fixed; inset:0;
   background-image:
-    linear-gradient(rgba(90,70,35,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(90,70,35,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(226,197,150,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(226,197,150,0.05) 1px, transparent 1px);
   background-size:72px 72px;
   pointer-events:none; z-index:0;
 }
@@ -59,7 +59,7 @@ nav {
   padding:0 clamp(20px, 5vw, 60px);
   display:flex; align-items:center; justify-content:space-between;
   backdrop-filter:blur(24px);
-  background:rgba(251,249,244,0.88);
+  background:rgba(23,19,15,0.9);
   border-bottom:1px solid var(--border);
 }
 
@@ -118,7 +118,7 @@ nav {
   .nav-links {
     display:none; flex-direction:column; gap:0;
     position:fixed; top:var(--nav-h); left:0; right:0;
-    background:rgba(251,249,244,0.98);
+    background:rgba(23,19,15,0.98);
     border-bottom:1px solid var(--border);
     padding:12px 0;
   }
@@ -143,12 +143,12 @@ nav {
 .hero-orb { position:absolute; border-radius:50%; pointer-events:none; z-index:0; filter:blur(90px); }
 .hero-orb-a {
   width:520px; height:520px; left:-100px; top:-80px;
-  background:radial-gradient(circle, rgba(37,99,235,0.13) 0%, transparent 70%);
+  background:radial-gradient(circle, rgba(96,165,250,0.15) 0%, transparent 70%);
   animation:orbFloat 12s ease-in-out infinite;
 }
 .hero-orb-b {
   width:460px; height:460px; right:-80px; bottom:-60px;
-  background:radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+  background:radial-gradient(circle, rgba(129,140,248,0.13) 0%, transparent 70%);
   animation:orbFloat 14s ease-in-out infinite reverse;
 }
 @keyframes orbFloat {
@@ -173,10 +173,10 @@ nav {
   border-radius:26px;
   border:3px solid rgba(255,255,255,0.88);
   background:var(--surface);
-  box-shadow:
-    0 0 0 1px var(--border),
-    0 24px 48px rgba(70,55,25,0.16),
-    0 0 60px rgba(37,99,235,0.12);
+box-shadow:
+0 0 0 1px var(--border),
+0 24px 48px rgba(0,0,0,0.55),
+0 0 60px rgba(96,165,250,0.18);
   transform-style:preserve-3d;
   perspective:1000px;
   transition:transform 0.2s ease-out;
@@ -187,7 +187,7 @@ nav {
   border-radius:23px;
   overflow:hidden;
   aspect-ratio:4 / 4.5;
-  background:radial-gradient(circle at 30% 25%, #f5efe4 0%, #e2d8c6 70%);
+  background:radial-gradient(circle at 30% 25%, #2e261a 0%, #17120c 70%);
   animation:photoFloat 7s ease-in-out 1.4s infinite;
 }
 .photo-fallback {
@@ -224,7 +224,7 @@ nav {
   font-size:0.64rem; letter-spacing:0.26em; text-transform:uppercase;
   color:var(--accent);
   border:1px solid var(--border);
-  background:rgba(255,253,248,0.78);
+  background:rgba(40,34,25,0.8);
   padding:7px 16px; border-radius:999px;
   margin-bottom:22px;
   opacity:0; animation:fadeUp 0.7s 0.35s forwards;
@@ -272,7 +272,7 @@ nav {
 .chip:hover {
   transform:translateY(-5px) rotateX(7deg);
   border-color:var(--accent);
-  box-shadow:0 14px 34px rgba(37,99,235,0.14);
+  box-shadow:0 14px 34px rgba(96,165,250,0.16);
 }
 .chip-title { font-weight:700; font-size:0.9rem; color:var(--text); margin-bottom:5px; }
 .chip-sub {
@@ -423,7 +423,7 @@ section {
 }
 .skill-card:hover {
   transform:translateY(-5px);
-  box-shadow:0 12px 32px rgba(70,55,25,0.10);
+  box-shadow:0 12px 32px rgba(0,0,0,0.4);
   border-color:var(--accent);
 }
 
@@ -497,7 +497,7 @@ section {
 .project-card:hover {
   border-color:var(--accent);
   transform:translateY(-3px);
-  box-shadow:0 14px 36px rgba(70,55,25,0.10), 0 0 40px rgba(37,99,235,0.10);
+  box-shadow:0 14px 36px rgba(0,0,0,0.4), 0 0 40px rgba(96,165,250,0.1);
 }
 .project-card::before {
   content:''; position:absolute; left:0; top:0; bottom:0;
@@ -553,13 +553,13 @@ section {
 .achievement-card:hover {
   transform:translateY(-4px);
   border-color:var(--accent3);
-  box-shadow:0 14px 34px rgba(70,55,25,0.10), 0 0 36px rgba(37,99,235,0.10);
+  box-shadow:0 14px 34px rgba(0,0,0,0.4), 0 0 36px rgba(96,165,250,0.1);
 }
 
 .achievement-num {
   font-family:'Space Grotesk', sans-serif;
   font-size:2.8rem; font-weight:700;
-  color:rgba(37,99,235,0.20); line-height:1; margin-bottom:12px;
+  color:rgba(96,165,250,0.15); line-height:1; margin-bottom:12px;
   transition:color 0.3s;
 }
 .achievement-card:hover .achievement-num { color:var(--accent); }
@@ -686,78 +686,11 @@ a:focus-visible, button:focus-visible {
   .hero-cta { flex-direction:column; }
 }
 
-/* ── Add Project Button ── */
-.add-project-btn {
-  font-family:'Space Mono', monospace;
-  font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--accent); background:transparent;
-  border:1px solid var(--border); border-radius:var(--radius);
-  padding:6px 16px; cursor:pointer;
-  transition:background 0.25s, border-color 0.25s, transform 0.2s;
-}
-.add-project-btn:hover {
-  background:var(--faint); border-color:var(--accent); transform:translateY(-1px);
-}
-
 /* ── Section header flex ── */
 .section-header { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:12px; }
 .section-header .section-line { margin-top:18px; }
 
-/* ── Modal Overlay ── */
-.modal-overlay {
-  position:fixed; inset:0; z-index:2000;
-  background:rgba(0,0,0,0.7); backdrop-filter:blur(6px);
-  display:flex; align-items:center; justify-content:center;
-  opacity:0; pointer-events:none;
-  transition:opacity 0.3s;
-}
-.modal-overlay.active { opacity:1; pointer-events:auto; }
-
-/* ── Modal ── */
-.modal {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius); padding:32px;
-  width:90%; max-width:520px;
-  transform:translateY(20px); transition:transform 0.3s;
-  max-height:90vh; overflow-y:auto;
-}
-.modal-overlay.active .modal { transform:translateY(0); }
-.modal h3 {
-  font-weight:700; font-size:1.1rem; margin-bottom:24px; color:var(--text);
-}
-.modal label {
-  display:block; font-family:'Space Mono', monospace;
-  font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:6px; margin-top:16px;
-}
-.modal input, .modal textarea {
-  width:100%; padding:10px 12px;
-  background:var(--surface2); border:1px solid var(--border);
-  border-radius:var(--radius); color:var(--text);
-  font-family:'Space Grotesk', sans-serif; font-size:0.82rem;
-  outline:none; transition:border-color 0.25s;
-}
-.modal input:focus, .modal textarea:focus { border-color:var(--accent); }
-.modal textarea { resize:vertical; min-height:80px; }
-.modal-actions {
-  display:flex; gap:12px; margin-top:28px; justify-content:flex-end;
-}
-.modal-actions .btn-primary { padding:10px 24px; }
-.modal-actions .btn-ghost { padding:10px 24px; }
-
-/* ── Delete Button on Dynamic Cards ── */
 .project-card { position:relative; }
-.project-card .delete-btn {
-  position:absolute; top:12px; right:12px;
-  width:24px; height:24px; border-radius:50%;
-  background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3);
-  color:#ef4444; font-size:0.75rem; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:background 0.2s, transform 0.2s; z-index:10;
-}
-.project-card .delete-btn:hover {
-  background:rgba(239,68,68,0.3); transform:scale(1.1);
-}
 
 /* ── Certifications ── */
 .certs-grid {
@@ -776,19 +709,7 @@ a:focus-visible, button:focus-visible {
 .cert-card:hover {
   border-color:var(--accent);
   transform:translateY(-3px);
-  box-shadow:0 14px 36px rgba(70,55,25,0.10), 0 0 40px rgba(37,99,235,0.10);
-}
-.cert-card .delete-btn {
-  position:absolute; top:12px; right:12px;
-  width:24px; height:24px; border-radius:50%;
-  background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3);
-  color:#ef4444; font-size:0.75rem; cursor:pointer;
-  display:none; align-items:center; justify-content:center;
-  transition:background 0.2s, transform 0.2s; z-index:10;
-}
-.cert-card.dynamic .delete-btn { display:flex; }
-.cert-card .delete-btn:hover {
-  background:rgba(239,68,68,0.3); transform:scale(1.1);
+  box-shadow:0 14px 36px rgba(0,0,0,0.4), 0 0 40px rgba(96,165,250,0.1);
 }
 .cert-img-wrap {
   position:relative;
@@ -809,7 +730,7 @@ a:focus-visible, button:focus-visible {
   position:absolute; right:10px; bottom:10px;
   font-family:'Space Mono', monospace;
   font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--accent); background:rgba(255,253,248,0.96);
+  color:var(--accent); background:rgba(15,20,25,0.9);
   border:1px solid var(--border); border-radius:2px;
   padding:4px 10px;
   opacity:0; transition:opacity 0.25s;
@@ -873,41 +794,6 @@ a:focus-visible, button:focus-visible {
 }
 .cert-card:hover .cert-skills li { color:var(--accent); border-color:rgba(96,165,250,0.3); }
 
-/* Add certification slot */
-.add-cert-card {
-  border:1px dashed var(--border);
-  background:transparent;
-  border-radius:var(--radius);
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  gap:14px; min-height:300px;
-  cursor:pointer;
-  transition:border-color 0.3s, background 0.3s, transform 0.3s;
-}
-.add-cert-card:hover {
-  border-color:var(--accent);
-  background:var(--faint);
-  transform:translateY(-3px);
-}
-.add-cert-plus {
-  width:56px; height:56px; border-radius:50%;
-  border:1px solid var(--border);
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.6rem; color:var(--accent);
-  transition:transform 0.3s, border-color 0.3s;
-}
-.add-cert-card:hover .add-cert-plus { transform:rotate(90deg); border-color:var(--accent); }
-.add-cert-label {
-  font-family:'Space Mono', monospace;
-  font-size:0.64rem; letter-spacing:0.18em; text-transform:uppercase;
-  color:var(--muted);
-}
-.add-cert-hint {
-  font-size:0.72rem; color:var(--text);
-  max-width:250px; text-align:center; line-height:1.6;
-  padding:0 16px;
-}
-
 /* Certificate lightbox */
 .lightbox-overlay {
   position:fixed; inset:0; z-index:3000;
@@ -942,37 +828,9 @@ a:focus-visible, button:focus-visible {
 }
 .lightbox-close:hover { border-color:var(--accent); transform:rotate(90deg); }
 
-/* Cert modal file input */
-.cert-file-label {
-  display:block; font-family:'Space Mono', monospace;
-  font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:6px; margin-top:16px;
-}
-.cert-file-input {
-  display:block; width:100%;
-  font-family:'Space Grotesk', sans-serif; font-size:0.78rem;
-  color:var(--muted);
-}
-.cert-file-input::file-selector-button {
-  font-family:'Space Mono', monospace;
-  font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase;
-  padding:8px 16px; margin-right:14px;
-  background:var(--surface2); color:var(--accent);
-  border:1px solid var(--border); border-radius:var(--radius);
-  cursor:pointer; transition:background 0.25s, border-color 0.25s;
-}
-.cert-file-input::file-selector-button:hover {
-  background:var(--faint); border-color:var(--accent);
-}
-.cert-file-preview {
-  margin-top:10px; max-height:120px; border-radius:var(--radius);
-  border:1px solid var(--border); display:none;
-}
-
 /* Cert section responsive */
 @media(max-width:520px) {
   .cert-zoom-hint { display:none; }
-  .add-cert-card { min-height:200px; }
 }
 </style>
 </head>
@@ -1248,12 +1106,9 @@ a:focus-visible, button:focus-visible {
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-header reveal">
-    <div>
-      <div class="section-num">04 — Projects</div>
-      <h2 class="section-title">Key Work</h2>
-      <div class="section-line"></div>
-    </div>
-    <button class="add-project-btn" id="addProjectBtn">+ Add Project</button>
+    <div class="section-num">04 — Projects</div>
+    <h2 class="section-title">Key Work</h2>
+    <div class="section-line"></div>
   </div>
   <div class="project-card reveal">
     <div class="project-badge">Final Year Thesis</div>
@@ -1317,12 +1172,9 @@ a:focus-visible, button:focus-visible {
 <!-- CERTIFICATIONS -->
 <section id="certifications">
   <div class="section-header reveal">
-    <div>
-      <div class="section-num">05 — Certifications</div>
-      <h2 class="section-title">Verified Credentials</h2>
-      <div class="section-line"></div>
-    </div>
-    <button class="add-project-btn" id="addCertBtn">+ Add Certification</button>
+    <div class="section-num">05 — Certifications</div>
+    <h2 class="section-title">Verified Credentials</h2>
+    <div class="section-line"></div>
   </div>
   <div class="certs-grid" id="certsGrid">
 
@@ -1407,13 +1259,6 @@ a:focus-visible, button:focus-visible {
       </div>
     </div>
 
-    <!-- Empty slot for the next (in-progress) certification -->
-    <div class="add-cert-card" id="addCertSlot" role="button" tabindex="0" aria-label="Add certification">
-      <div class="add-cert-plus">+</div>
-      <div class="add-cert-label">Add Certification</div>
-      <div class="add-cert-hint">Your next certificate goes here — click to add it live, right from the browser.</div>
-    </div>
-
   </div>
 </section>
 
@@ -1494,59 +1339,6 @@ a:focus-visible, button:focus-visible {
   <div class="footer-left">© 2026 Ebad-ur-Rehman Rajput</div>
   <div class="footer-right">Infrastructure &amp; Network Engineer</div>
 </footer>
-
-<!-- Add Project Modal -->
-<div class="modal-overlay" id="projectModal">
-  <div class="modal">
-    <h3>Add New Project</h3>
-    <label for="projName">Project Name *</label>
-    <input type="text" id="projName" placeholder="e.g. My Awesome Project">
-
-    <label for="projBadge">Badge Label *</label>
-    <input type="text" id="projBadge" placeholder="e.g. Security, AI/ML, Healthcare">
-
-    <label for="projDesc">Description *</label>
-    <textarea id="projDesc" placeholder="Brief description of the project..."></textarea>
-
-    <label for="projBullets">Key Features (one per line) *</label>
-    <textarea id="projBullets" placeholder="Built feature A&#10;Implemented feature B&#10;Deployed on platform C"></textarea>
-
-    <label for="projLive">Live Demo URL</label>
-    <input type="url" id="projLive" placeholder="https://example.com">
-
-    <label for="projGithub">GitHub URL</label>
-    <input type="url" id="projGithub" placeholder="https://github.com/...">
-
-    <div class="modal-actions">
-      <button class="btn-ghost" id="modalCancel">Cancel</button>
-      <button class="btn-primary" id="modalSave">Save Project</button>
-    </div>
-  </div>
-</div>
-
-<!-- Add Certification Modal -->
-<div class="modal-overlay" id="certModal">
-  <div class="modal">
-    <h3>Add Certification</h3>
-    <label for="certName">Certificate Name *</label>
-    <input type="text" id="certName" placeholder="e.g. Introduction to Cloud Computing">
-
-    <label for="certIssuer">Issued By *</label>
-    <input type="text" id="certIssuer" placeholder="e.g. Microsoft, Google, Coursera">
-
-    <label for="certSkills">Skills Covered (one per line) *</label>
-    <textarea id="certSkills" placeholder="Networking Fundamentals&#10;Cloud Concepts&#10;Security Basics"></textarea>
-
-    <label class="cert-file-label" for="certImage">Certificate Image *</label>
-    <input class="cert-file-input" type="file" id="certImage" accept="image/*">
-    <img class="cert-file-preview" id="certImagePreview" alt="Certificate preview">
-
-    <div class="modal-actions">
-      <button class="btn-ghost" id="certCancel">Cancel</button>
-      <button class="btn-primary" id="certSave">Save Certification</button>
-    </div>
-  </div>
-</div>
 
 <!-- Certificate Lightbox -->
 <div class="lightbox-overlay" id="certLightbox">
@@ -1647,256 +1439,11 @@ if (window.matchMedia('(pointer:fine)').matches) {
   });
 }
 
-// ── Add Project Feature ──
-const addBtn = document.getElementById('addProjectBtn');
-const modal = document.getElementById('projectModal');
-const cancelBtn = document.getElementById('modalCancel');
-const saveBtn = document.getElementById('modalSave');
-const projectsSection = document.getElementById('projects');
-
-// Open modal
-addBtn.addEventListener('click', () => modal.classList.add('active'));
-
-// Close modal
-cancelBtn.addEventListener('click', () => modal.classList.remove('active'));
-modal.addEventListener('click', e => {
-  if (e.target === modal) modal.classList.remove('active');
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') modal.classList.remove('active');
-});
-
-// Load saved projects from localStorage
-function loadProjects() {
-  const saved = JSON.parse(localStorage.getItem('customProjects') || '[]');
-  saved.forEach(p => renderProjectCard(p));
-}
-
-// Save projects to localStorage
-function saveProjects() {
-  const cards = projectsSection.querySelectorAll('.project-card.dynamic');
-  const projects = [];
-  cards.forEach(card => {
-    projects.push({
-      name: card.querySelector('.project-title').textContent,
-      badge: card.querySelector('.project-badge').textContent,
-      desc: card.querySelector('.project-desc').textContent,
-      bullets: Array.from(card.querySelectorAll('.project-points li'))
-                    .map(li => li.textContent),
-      live: card.querySelector('a[target="_blank"]')?.href || '',
-      github: card.dataset.github || ''
-    });
-  });
-  localStorage.setItem('customProjects', JSON.stringify(projects));
-}
-
-// Render a single project card
-function renderProjectCard(data) {
-  const card = document.createElement('div');
-  card.className = 'project-card reveal dynamic';
-  card.dataset.github = data.github || '';
-
-  const badgeColor = data.badge.toLowerCase().includes('health') ? 'rgba(52,211,153,0.3)' : 'rgba(96,165,250,0.3)';
-  const badgeTextColor = data.badge.toLowerCase().includes('health') ? 'var(--green)' : 'var(--accent)';
-
-  let linksHTML = '';
-  if (data.live) {
-    linksHTML += `<a href="${data.live}" target="_blank" class="btn-ghost">Live Demo ↗</a> `;
-  }
-  if (data.github) {
-    linksHTML += `<a href="${data.github}" target="_blank" class="btn-ghost" style="margin-left:8px">GitHub ↗</a>`;
-  }
-
-  card.innerHTML = `
-    <button class="delete-btn" title="Remove project">&times;</button>
-    <div class="project-badge" style="border-color:${badgeColor};color:${badgeTextColor}">${data.badge}</div>
-    <h3 class="project-title">${data.name}</h3>
-    <p class="project-desc">${data.desc}</p>
-    <ul class="project-points">
-      ${data.bullets.map(b => `<li>${b}</li>`).join('')}
-    </ul>
-    ${linksHTML}
-  `;
-
-  // Insert before the first static project card (ZEROSHIELD)
-  const firstStatic = projectsSection.querySelector('.project-card:not(.dynamic)');
-  projectsSection.insertBefore(card, firstStatic);
-
-  // Delete button handler
-  card.querySelector('.delete-btn').addEventListener('click', () => {
-    card.remove();
-    saveProjects();
-  });
-
-  // Re-observe for scroll reveal
-  revealObs.observe(card);
-}
-
-// Save button handler
-saveBtn.addEventListener('click', () => {
-  const name = document.getElementById('projName').value.trim();
-  const badge = document.getElementById('projBadge').value.trim();
-  const desc = document.getElementById('projDesc').value.trim();
-  const bulletsRaw = document.getElementById('projBullets').value.trim();
-  const live = document.getElementById('projLive').value.trim();
-  const github = document.getElementById('projGithub').value.trim();
-
-  if (!name || !badge || !desc || !bulletsRaw) {
-    alert('Please fill in all required fields.');
-    return;
-  }
-
-  const bullets = bulletsRaw.split('\n').map(b => b.trim()).filter(b => b);
-
-  renderProjectCard({ name, badge, desc, bullets, live, github });
-  saveProjects();
-
-  // Reset form
-  ['projName','projBadge','projDesc','projBullets','projLive','projGithub']
-    .forEach(id => document.getElementById(id).value = '');
-
-  modal.classList.remove('active');
-});
-
-// Load on page init
-loadProjects();
-
-// ── Add Certification Feature ──
-const addCertBtn = document.getElementById('addCertBtn');
-const addCertSlot = document.getElementById('addCertSlot');
-const certModal = document.getElementById('certModal');
-const certCancel = document.getElementById('certCancel');
-const certSave = document.getElementById('certSave');
-const certImageInput = document.getElementById('certImage');
-const certPreview = document.getElementById('certImagePreview');
-const certsGrid = document.getElementById('certsGrid');
+// ── Certificate Lightbox ──
 const lightbox = document.getElementById('certLightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxCaption = document.getElementById('lightboxCaption');
 
-let certImageData = '';
-let customCerts = JSON.parse(localStorage.getItem('customCerts') || '[]');
-
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, c => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[c]));
-}
-
-// Open / close cert modal
-function openCertModal() { certModal.classList.add('active'); }
-addCertBtn.addEventListener('click', openCertModal);
-addCertSlot.addEventListener('click', openCertModal);
-addCertSlot.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCertModal(); }
-});
-certCancel.addEventListener('click', () => certModal.classList.remove('active'));
-certModal.addEventListener('click', e => {
-  if (e.target === certModal) certModal.classList.remove('active');
-});
-
-// Image file → compressed dataURL (fits localStorage limits)
-certImageInput.addEventListener('change', () => {
-  const file = certImageInput.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = new Image();
-    img.onload = () => {
-      const maxW = 1400;
-      const scale = Math.min(1, maxW / img.width);
-      const canvas = document.createElement('canvas');
-      canvas.width = Math.round(img.width * scale);
-      canvas.height = Math.round(img.height * scale);
-      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-      certImageData = canvas.toDataURL('image/jpeg', 0.82);
-      certPreview.src = certImageData;
-      certPreview.style.display = 'block';
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-});
-
-// Render one dynamic certification card
-function renderCertCard(data, persist = true) {
-  const card = document.createElement('div');
-  card.className = 'cert-card reveal dynamic';
-  card.dataset.id = data.id;
-  card.innerHTML = `
-    <button class="delete-btn" title="Remove certification">&times;</button>
-    <div class="cert-img-wrap" data-caption="${escapeHtml(data.name)}">
-      <img src="${data.image}" alt="${escapeHtml(data.name)} certificate">
-      <span class="cert-zoom-hint">🔍 View Full Certificate</span>
-    </div>
-    <div class="cert-body">
-      <div class="cert-issuer-row">
-        <span class="cert-issuer">${escapeHtml(data.issuer)}</span>
-        <span class="cert-status">Verified</span>
-      </div>
-      <h3 class="cert-name">${escapeHtml(data.name)}</h3>
-      <div class="cert-skills-title">Skills Covered</div>
-      <ul class="cert-skills">
-        ${data.skills.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
-      </ul>
-    </div>
-  `;
-
-  certsGrid.insertBefore(card, addCertSlot);
-
-  card.querySelector('.delete-btn').addEventListener('click', () => {
-    card.remove();
-    customCerts = customCerts.filter(c => c.id !== data.id);
-    persistCerts();
-  });
-
-  wireLightbox(card);
-  revealObs.observe(card);
-
-  if (persist) {
-    customCerts.push(data);
-    persistCerts();
-  }
-}
-
-function persistCerts() {
-  try {
-    localStorage.setItem('customCerts', JSON.stringify(customCerts));
-  } catch (err) {
-    alert('Could not save: browser storage is full (image too large).');
-  }
-}
-
-// Save button
-certSave.addEventListener('click', () => {
-  const name = document.getElementById('certName').value.trim();
-  const issuer = document.getElementById('certIssuer').value.trim();
-  const skillsRaw = document.getElementById('certSkills').value.trim();
-
-  if (!name || !issuer || !skillsRaw || !certImageData) {
-    alert('Please fill in all fields and select a certificate image.');
-    return;
-  }
-
-  const skills = skillsRaw.split('\n').map(s => s.trim()).filter(Boolean);
-
-  renderCertCard({
-    id: Date.now().toString(),
-    name, issuer, skills,
-    image: certImageData
-  });
-
-  ['certName', 'certIssuer', 'certSkills'].forEach(id => document.getElementById(id).value = '');
-  certImageInput.value = '';
-  certPreview.style.display = 'none';
-  certImageData = '';
-  certModal.classList.remove('active');
-});
-
-// Load saved certifications
-customCerts.forEach(c => renderCertCard(c, false));
-
-// ── Certificate Lightbox ──
 function openLightbox(src, caption) {
   lightboxImg.src = src;
   lightboxCaption.textContent = caption || '';
@@ -1919,7 +1466,7 @@ wireLightbox(document);
 document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeLightbox(); certModal.classList.remove('active'); }
+  if (e.key === 'Escape') closeLightbox();
 });
 </script>
 
