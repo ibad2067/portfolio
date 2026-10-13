@@ -1,7 +1,7 @@
 # AGENTS.md — Portfolio Project Context
 
 ## Project Owner
-- **Name:** Ebad-ur-Rehman Rajput
+- **Name:** Ebad ur Rehman
 - **Email:** ebadurrehman881@gmail.com
 - **Phone:** (+92) 332 204 6126
 - **Location:** Nawabshah, Sindh, Pakistan
@@ -58,7 +58,7 @@
 
 ## Sections (in order)
 1. **Nav** — Fixed top bar with "ER." logo, nav links (About, Skills, Experience, Projects, Certs, Awards, Education, Contact), blue "Hire Me" pill, mobile hamburger
-2. **Hero** — Two-column desktop (`grid-template-columns:minmax(260px,380px) 1fr`): rectangular 3D photo card LEFT (`#photoCard`, radius 26px, white 3px border, aspect 4/4.5, dark "Open to Opportunities 2026" pill overlay inside the frame) + text RIGHT (`// System Profile` tag, "Hello, I'm Ebad-ur-Rehman Rajput", bio, 3 skill chips, CTAs); animated glow orbs, photoFloat bob. Mobile ≤960px: single column, photo first (top), everything centered.
+2. **Hero** — Two-column desktop (`grid-template-columns:minmax(260px,380px) 1fr`): rectangular 3D photo card LEFT (`#photoCard`, radius 26px, white 3px border, aspect 4/4.5, dark "Open to Opportunities 2026" pill overlay inside the frame) + text RIGHT (`// System Profile` tag, "Hello, I'm Ebad ur Rehman", bio, 3 skill chips, CTAs); animated glow orbs, photoFloat bob. Mobile ≤960px: single column, photo first (top), everything centered.
 3. **About** (01) — Bio, info cards `1fr 1fr` grid, circuit board SVG visual
 4. **Skills** (02) — 6 skill cards: Networking, Infrastructure, Cybersecurity, Databases, Programming, Office & Soft Skills
 5. **Experience** (03) — Single-column left-rail timeline (no alternating), plain blue mono date text, 3 internships newest-first: BIUT → DWP → Habib
@@ -74,13 +74,16 @@ Every section header uses a **small blue mono label** (`.section-num`: `font-siz
 ---
 
 ## Certifications (real, verified)
-1. **Introduction to Computers and Operating Systems and Security** — Microsoft via Coursera, Issued Oct 4, 2026
+1. **Microsoft Foundations of Cybersecurity, Networking, and Cloud Systems** — Microsoft via Coursera (specialization, 3 courses: Computers/OS & Security, Networking & Cloud, Cybersecurity Threat Vectors & Mitigation), Issued Oct 12, 2026
+   - Verify: https://coursera.org/verify/specialization/IGA7HZQP567K
+   - Image: `images/certificates/foundations-specialization.jpg` (rendered from owner's PDF in Downloads)
+2. **Introduction to Computers and Operating Systems and Security** — Microsoft via Coursera, Issued Oct 4, 2026
    - Verify: https://coursera.org/verify/T7FZY0PRQ9QW
    - Image: `images/certificates/os-security.jpg`
-2. **Introduction to Networking and Cloud Computing** — Microsoft via Coursera, Issued Oct 7, 2026
+3. **Introduction to Networking and Cloud Computing** — Microsoft via Coursera, Issued Oct 7, 2026
    - Verify: https://coursera.org/verify/70ZDW0AB5IY
    - Image: `images/certificates/network-cloud.jpg`
-3. **MERN Stack Development** — Sukkur IBA University / IS&T Dept, Govt of Sindh (IT Industry Readiness Bootcamp at QUEST Nawabshah)
+4. **MERN Stack Development** — Sukkur IBA University / IS&T Dept, Govt of Sindh (IT Industry Readiness Bootcamp at QUEST Nawabshah)
    - Verify: https://verifybootcamp.netlify.app/certificate/4540294379791
    - Image: `images/certificates/mern-stack.jpg`
 
